@@ -15,6 +15,8 @@
   const btnLogin = document.getElementById("btnLogin");
   const btnSignUp = document.getElementById("btnSignUp");
   const btnLogout = document.getElementById("btnLogout");
+  const foreleser = document.getElementById("btn-foreleser");
+  const student = document.getElementById("btn-student");
 
   //Add login event
   btnLogin.addEventListener('click', e => {
