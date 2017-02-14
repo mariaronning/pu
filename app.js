@@ -47,7 +47,7 @@
     if(firebaseUser) {
       console.log(firebaseUser);
       btnLogout.classList.remove('hide');
-      document.location.href = "/studentFrontpage/frontpage.html";
+      //(document.location.href = "/studentFrontpage/frontpage.html";
 
     } else {
       console.log("User not logged in")
