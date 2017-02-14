@@ -32,6 +32,12 @@
   btnLogout.addEventListener('click', e => {
     firebase.auth().signOut();
   });
+  foreleser.addEventListener('click', e => {
+    document.location.href = "/professor/professor.html";
+  });
+  student.addEventListener('click', e => {
+    document.location.href = "/student/student.html";
+  });
 
   //Add signup event
   btnSignUp.addEventListener('click', e => {
