@@ -15,6 +15,8 @@
   const btnLogin = document.getElementById("btnLogin");
   const btnSignUp = document.getElementById("btnSignUp");
   const btnLogout = document.getElementById("btnLogout");
+  const foreleser = document.getElementById("btn-foreleser");
+  const student = document.getElementById("btn-student");
 
   //Add login event
   btnLogin.addEventListener('click', e => {
@@ -29,6 +31,12 @@
 
   btnLogout.addEventListener('click', e => {
     firebase.auth().signOut();
+  });
+  foreleser.addEventListener('click', e => {
+    document.location.href = "/professor/professor.html";
+  });
+  student.addEventListener('click', e => {
+    document.location.href = "/student/student.html";
   });
 
   //Add signup event
