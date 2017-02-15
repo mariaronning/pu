@@ -1,22 +1,16 @@
-<!DOCTYPE HTML> 
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
+
+    <head>
+        <meta charset="utf-8">
         <title>prepBot</title>
-		<script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
 		<link rel="stylesheet" type="text/css" href="../style.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	</head>
-		<body>
-			<h1> Statistics</h1>
-			<button id="btn"> Add your courses </button>
-			<div class="container-fluid col-sm-3 col-md-3"></div>
-					<input id="sok" type="text" class="form-control" placeholder="Search">
-					<button type="submit" class="btn btn-default" onclick=myFunction()><span class="glyphicon glyphicon-search"></span></button>
-			</div>
-	<script src="api.js"></script>
-	
-	 <nav class="navbar navbar-default">
+        <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+
+    <body>
+      <nav class="navbar navbar-default">
         <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -36,13 +30,23 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <h1 >Student'</h1> <br>
+            <h1 >Professor</h1> <br>
           </div>
         </div>
       </div>
+		
+		<h1> Statistics</h1>
+			<button id="btn"> Add your courses </button>
+			<div class="container-fluid col-sm-3 col-md-3"></div>
+					<input id="sok" type="text" class="form-control" placeholder="Search">
+					<button type="submit" class="btn btn-default" onclick=myFunction()><span class="glyphicon glyphicon-search"></span></button>
+			</div>
 
       <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
       <script src="../app.js?<?php echo time(); ?"></script>
-      <script src="student.js?<?php echo time(); ?"></script>
-	</body>
+      <script src="professor.js?<?php echo time(); ?"></script>
+	<script src="api.js"></script>
+    </body>
+
 </html>
+
