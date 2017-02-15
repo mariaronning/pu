@@ -2,18 +2,26 @@
   display: none;
 }
 
-#name {
-    margin-right: 100px;
-}
-
 tr {
-width: 100%;
-display: inline-table;
-height:60px;                // <-- the rows height 
+    height: 50px;
 }
 
-table{
- height:500px;              // <-- Select the height of the table
- display: -moz-groupbox;    // For firefox bad effect
+#table1{
+    height: 300px;
+    float: left;
+    margin-top: 30px;
 }
 
+#table2 {
+
+}
+
+.form-group {
+    margin-top: 30px;
+}
+
+#search {
+    float: right;
+    margin-top: 30px;
+    width: 600px;
+}
