@@ -1,8 +1,20 @@
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal(-1, [1,2,3].indexOf(4));
-    });
+
+'use strict'
+
+var chai = require("chai");
+var expect = chai.expect;
+
+chai.should();
+
+function returnsName(name) {
+  return name;
+}
+
+describe("Employee", e => {
+
+});
+describe("Salary", function(params) {
+  it('returns name passed to the function', function(){
+    returnsName("May".should.equal("May"));
   });
 });
