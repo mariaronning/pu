@@ -2,18 +2,22 @@
   display: none;
 }
 
-#name {
-    margin-right: 100px;
+/* START STUDENT.HTML */
+
+#col {
+    height: 50px;
 }
 
-tr {
-width: 100%;
-display: inline-table;
-height:60px;                // <-- the rows height 
+#table{
+    height: 300px;
+    float: left;
+    margin-top: 30px;
 }
 
-table{
- height:500px;              // <-- Select the height of the table
- display: -moz-groupbox;    // For firefox bad effect
+#search {
+    margin-top: 50px;
+    margin-left: 100px;
 }
 
+
+/* END STUDENT.HTML */
