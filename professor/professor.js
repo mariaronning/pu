@@ -1,19 +1,53 @@
 
 
-
+const searchValue = document.getElementById('sok');
 const preObject = document.getElementById('searchEnigne');
 const dbRefCourses = firebase.database().ref().child('Courses');
-const uList = document.getElementById('search');
+const uList = document.getElementById('searchResults');
+
+searchValue.addEventListener('input', e => {
+    if(searchValue.value == "") {
+        clearList();
+    } else {
+        fireSearch(searchValue.value.toUpperCase());
+    }
+
+});
 
 
-dbRefCourses.on('value', snap => {
+
+function fireSearch(startValue) {
+    clearList();
+    dbRefCourses.orderByKey().startAt(startValue)
+    .endAt(startValue + "\uf8ff").limitToFirst(10).on("child_added", snap => {
+        createList(snap);
+    });
+};
+
+function createList(snap) {
+    const li = document.createElement('li');
+    li.innerText = snap.key + " " + snap.val().name;
+    li.id = snap.key;
+    li.class = "searchElements";
+    uList.appendChild(li);
+}
+
+function clearList() {
+    if (searchResults) {
+        while (searchResults.firstChild) {
+            searchResults.removeChild(searchResults.firstChild);
+        }
+    }
+}
+
+/*dbRefCourses.on('value', snap => {
 
     const li = document.createElement('li');
     li.innerText = snap.val();
     li.id = snap.key();
     uList.appendChild(li);
 
-});
+});*/
 
 
 /*dbRefList.on('child_added', snap => {
