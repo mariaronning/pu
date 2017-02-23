@@ -3,7 +3,7 @@
 const searchValue = document.getElementById('sok');
 const preObject = document.getElementById('searchEnigne');
 const dbRefCourses = firebase.database().ref().child('Courses');
-const uList = document.getElementById('searchResults');
+const searchResults = document.getElementById('searchResults');
 
 searchValue.addEventListener('input', e => {
     if(searchValue.value == "") {
@@ -13,8 +13,6 @@ searchValue.addEventListener('input', e => {
     }
 
 });
-
-
 
 function fireSearch(startValue) {
     clearList();
@@ -26,10 +24,13 @@ function fireSearch(startValue) {
 
 function createList(snap) {
     const li = document.createElement('li');
+    const div = document.createElement('div');
     li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
-    li.class = "searchElements";
-    uList.appendChild(li);
+    li.className = "list-group-item";
+    div.className = "searchElements"
+    searchResults.appendChild(div);
+    div.appendChild(li);
 }
 
 function clearList() {
