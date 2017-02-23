@@ -4,20 +4,21 @@ const searchValue = document.getElementById('sok');
 const preObject = document.getElementById('searchEnigne');
 const dbRefCourses = firebase.database().ref().child('Courses');
 const searchResults = document.getElementById('searchResults');
+const userId = document.getElementById("userID");
 
 searchValue.addEventListener('input', e => {
     if(searchValue.value == "") {
         clearList();
     } else {
-        fireSearch(searchValue.value.toUpperCase());
+        clearList();
+        fireSearch(searchValue.value.toUpperCase(), 10);
     }
 
 });
 
-function fireSearch(startValue) {
-    clearList();
+function fireSearch(startValue, limit) {
     dbRefCourses.orderByKey().startAt(startValue)
-    .endAt(startValue + "\uf8ff").limitToFirst(10).on("child_added", snap => {
+    .endAt(startValue + "\uf8ff").limitToFirst(limit).on("child_added", snap => {
         createList(snap);
     });
 };
@@ -41,39 +42,6 @@ function clearList() {
     }
 }
 
-/*dbRefCourses.on('value', snap => {
-
-    const li = document.createElement('li');
-    li.innerText = snap.val();
-    li.id = snap.key();
-    uList.appendChild(li);
-
-});*/
-
-
-/*dbRefList.on('child_added', snap => {
-
-  const li = document.createElement('li');
-  li.innerText = snap.val();
-  li.id = snap.key;
-  uList.appendChild(li);
-
-});
-
-dbRefList.on('child_changed', snap => {
-
-  const liChanged = document.getElementById(snap.key);
-  liChanged.innerText = snap.val();
-
-});
-
-dbRefList.on('child_removed', snap => {
-
-  const liToRemove = document.getElementById(snap.key);
-  liToRemove.remove();
-
-});*/
-
 btnLogout.addEventListener('click', e => {
 
   firebase.auth().signOut();
@@ -84,9 +52,7 @@ btnLogout.addEventListener('click', e => {
 firebase.auth().onAuthStateChanged(user => {
 
   if (user) {
-      //console.log(user.uid);
-  } else {
-      //console.log('Firebase is a jackass');
+      userId.innerText = user.email;
   }
 
 });
