@@ -8,3 +8,4 @@ install:
 script:
   - echo 'Hello Firebase'
   - mocha test/test.js
+  - mocha test/professorTest.js
