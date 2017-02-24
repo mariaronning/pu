@@ -8,5 +8,4 @@ install:
   - webdriver-manager start
 script:
   - echo 'Hello Firebase'
-  - mocha test/test.js
-  - mocha test/professorTest.js
+  - protractor test/professorTest.js
