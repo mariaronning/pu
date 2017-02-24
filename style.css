@@ -18,6 +18,12 @@
     margin-top: 50px;
     margin-left: 100px;
 }
-
-
 /* END STUDENT.HTML */
+
+/* START PROFESSOR.HTML */
+
+.searchElements:hover {
+    background-color: grey;
+}
+
+/*END PROFESSOR.HTML*/
