@@ -2,6 +2,16 @@
   display: none;
 }
 
+body {
+    background-image: url("/images/pu.jpg");
+}
+
+#header {
+    margin-left: -20px;
+}
+#symbol {
+    margin-top: -12px;
+}
 /* START STUDENT.HTML */
 
 #col {
