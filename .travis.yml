@@ -3,8 +3,9 @@ node_js:
   - "6.9.5"
 install:
   - npm install -g firebase-tools
-  - npm install mocha
-  - npm install chai
+  - npm install -g protractor
+  - webdriver-manager update
+  - webdriver-manager start
 script:
   - echo 'Hello Firebase'
   - mocha test/test.js
