@@ -3,15 +3,95 @@
 }
 
 body {
-    background-image: url("/images/pu.jpg");
+    font-family: 'Heebo', sans-serif;
+    background-image: url("test1.jpeg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 }
 
-#header {
-    margin-left: -20px;
+.navbar-default {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    opacity: 0.8;  
+    background: rgba(0, 0, 0, 0.8) !important;
+    height: 60px !important;
+    border-width: 0 !important;
+    border-radius: 0 !important;
 }
+
+/* START INDEX.HTML */
 #symbol {
-    margin-top: -12px;
+    margin-top: -8px;
 }
+
+#logo {
+    margin-top: 50px;
+    margin-left: -35px;
+}
+
+label {
+    color: lightgrey;
+    opacity: 1;
+    font-family: 'Heebo', sans-serif;
+}
+
+.rectangle {
+    height: 500px;
+    width: 600px;
+    background: rgba(0, 0, 0, 0.8);
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+form {
+    margin: 20px;
+    padding-top: 30px;
+}
+
+#btnLogin, #btnLogout {
+    margin-left: 20px;
+}
+
+/* END INDEX.HTML */
+
+/* START FADE EFFECT */
+#fade {
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+/* END FADE EFFECT*/
+
+
 /* START STUDENT.HTML */
 
 #col {
@@ -30,10 +110,63 @@ body {
 }
 /* END STUDENT.HTML */
 
+
+/* FOOTER */
+.footer {
+    position: absolute;
+    right: 0; 
+    bottom: 0;
+    left: 0;
+    height: 70px;
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+}
+
+#footertext {
+    margin-top: 15px;
+    font-family: 'Heebo', sans-serif;
+
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+    color: lightgrey;
+}
+
+a:hover {
+    color: white;
+}
+
+/* END FOOTER */
+
+
+/* HEADER 
+#header {
+    background: #2F3034;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.navbar-header{
+    background-color: darkgrey !important;
+}
+
+.navbar {
+    background-color: darkgrey !important;
+}
+
+.navbar-default {
+    background-color: darkgrey !important;
+}
+
+END HEADER */
+
+
 /* START PROFESSOR.HTML */
 
 .searchElements:hover {
-    background-color: grey;
+    background-color: darkgrey;
 }
 
 /*END PROFESSOR.HTML*/
