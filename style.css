@@ -10,7 +10,8 @@ body {
     background-size: cover;
     -o-background-size: cover;
 }
-
+ 
+/* START HEADER */
 .navbar-default {
     position: absolute;
     left: 0;
@@ -23,6 +24,8 @@ body {
     border-width: 0 !important;
     border-radius: 0 !important;
 }
+/* END HEADER */
+
 
 /* START INDEX.HTML */
 #symbol {
@@ -44,8 +47,9 @@ label {
     height: 500px;
     width: 600px;
     background: rgba(0, 0, 0, 0.8);
-    margin-top: 10%;
-    margin-bottom: 10%;
+    float: none;
+    align-content: center;
+    margin-top: 130px;
 }
 
 form {
@@ -56,8 +60,8 @@ form {
 #btnLogin, #btnLogout {
     margin-left: 20px;
 }
-
 /* END INDEX.HTML */
+
 
 /* START FADE EFFECT */
 #fade {
@@ -111,7 +115,7 @@ form {
 /* END STUDENT.HTML */
 
 
-/* FOOTER */
+/* START FOOTER */
 .footer {
     position: absolute;
     right: 0; 
@@ -138,29 +142,6 @@ a:hover {
 }
 
 /* END FOOTER */
-
-
-/* HEADER 
-#header {
-    background: #2F3034;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.navbar-header{
-    background-color: darkgrey !important;
-}
-
-.navbar {
-    background-color: darkgrey !important;
-}
-
-.navbar-default {
-    background-color: darkgrey !important;
-}
-
-END HEADER */
 
 
 /* START PROFESSOR.HTML */
