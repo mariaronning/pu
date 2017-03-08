@@ -1,4 +1,4 @@
-//Script for loading json objects from Memorizer into our database. 
+//Script for loading json objects from Memorizer into our database.
 var database = firebase.database();
 
 function getData(file, name) {

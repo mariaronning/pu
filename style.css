@@ -2,10 +2,6 @@
   display: none;
 }
 
-body {
-    background-image: url("/images/pu.jpg");
-}
-
 #header {
     margin-left: -20px;
 }
@@ -32,8 +28,13 @@ body {
 
 /* START PROFESSOR.HTML */
 
-.searchElements:hover {
-    background-color: grey;
+
+#professor {
+    background-image: url("/images/professor.jpeg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 }
 
 /*END PROFESSOR.HTML*/
