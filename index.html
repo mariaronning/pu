@@ -4,14 +4,14 @@
         <meta charset="utf-8">
         <title>prepBot</title>
         <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="styleG.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Heebo" rel="stylesheet">
     </head>
 
     <body style="font-family: 'Heebo', sans-serif;">
         <div class="container">
-            
+
                 <div class="navbar navbar-default navbar-fixed-top">
                     <div class="container-fullwidth">
                         <div class="navbar-collapse collapse">
@@ -28,11 +28,11 @@
                         </div>
                     </div>
                 </div>
-            
-            
+
+
             <div class="row" id="fade">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="rectangle">
+                <div id="rect" class="col-md-12 col-md-offset-3">
+                    <div class="rectangle col-md-12">
                         <div class="col-md-offset-3">
                             <img id="logo" src="/images/header1.png" alt="prepBot"><br>
                         </div>
@@ -53,13 +53,13 @@
                 </div>
             </div>
         </div>
-        
+
         <footer class="footer">
             <div class="container">
                 <p id="footertext" class="text-muted">Contact:<br> <a>theprepbot@gmail.com</a></p>
             </div>
         </footer>
-        
+
         <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
         <script src="app.js?<?php echo time(); ?"></script>
         <script src="index.js?<?php echo time(); ?"></script>

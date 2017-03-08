@@ -1,3 +1,4 @@
+//Script for loading json objects from Overflow into our database. 
 var database = firebase.database();
 
 function getData(name) {
