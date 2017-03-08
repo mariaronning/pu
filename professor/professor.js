@@ -6,16 +6,18 @@ const dbRefCourses = firebase.database().ref().child('Courses');
 const searchResults = document.getElementById('searchResults');
 const userId = document.getElementById("userID");
 
+//Listen for change in search value
 searchValue.addEventListener('input', e => {
     if(searchValue.value == "") {
         clearList();
     } else {
         clearList();
-        fireSearch(searchValue.value.toUpperCase(), 10);
+        fireSearch(searchValue.value.toUpperCase(), 6);
     }
 
 });
 
+//Searches the database and returns matching courses, maximum of 6 elements
 function fireSearch(startValue, limit) {
     dbRefCourses.orderByKey().startAt(startValue)
     .endAt(startValue + "\uf8ff").limitToFirst(limit).on("child_added", snap => {
@@ -23,17 +25,32 @@ function fireSearch(startValue, limit) {
     });
 };
 
+//Creates a list with matching elements from fireSearch
 function createList(snap) {
     const li = document.createElement('li');
     const div = document.createElement('div');
-    li.innerText = snap.key + " " + snap.val().name;
+    const a = document.createElement('a');
+
+    //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
-    li.className = "list-group-item";
-    div.className = "searchElements"
+    a.href = "/subjectSite/subject.html";
+    a.innerText = snap.key + " " + snap.val().name;
+    li.className = "courseItems";
+    a.style.color = "black";
+    a.style.textDecoration = "none";
+    div.style.height = "50px";
+    div.style.paddingTop = "12px";
+    div.style.borderBottom = "1px solid #C9C9C9";
+    div.className = "col-md-12";
+
+
+
     searchResults.appendChild(div);
     div.appendChild(li);
+    li.appendChild(a);
 }
 
+//Clears the list when search value is empty
 function clearList() {
     if (searchResults) {
         while (searchResults.firstChild) {
@@ -42,6 +59,8 @@ function clearList() {
     }
 }
 
+
+//Logs out the user
 btnLogout.addEventListener('click', e => {
 
   firebase.auth().signOut();
@@ -49,6 +68,7 @@ btnLogout.addEventListener('click', e => {
 
 });
 
+//Prints the user email of logged in user.
 firebase.auth().onAuthStateChanged(user => {
 
   if (user) {

@@ -1,3 +1,4 @@
+//Script for loading json objects, courses, from the IME-api into our database. 
 var database = firebase.database();
 
 getData()
