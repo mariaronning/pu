@@ -1,0 +1,64 @@
+
+#course{
+	font-family: monospace, "Courier New", serif;
+	font-size: 50px;
+	margin-top: 50px;
+	text-align: center;
+}
+
+#Availabletest{
+	font-family: monospace, "Courier New", serif;
+	font-size: 30px;
+	margin-top: 50px; 
+	text-align: center;
+	border: 1px solid black;
+	height: 450px;
+	padding-top: 20px;
+	margin-left: 170px;
+	margin-right: 20px;
+	background-color: white;
+
+}
+
+#Myresults{
+	font-family: monospace, "Courier New", serif;
+	font-size: 30px;
+	margin-top: 50px;
+	text-align: center;
+	border: 1px solid black;
+	height: 450px;
+	padding-top: 20px;
+	background-color: white;
+	
+}
+
+#Courseresults{
+	font-family: monospace, "Courier New", serif;
+	font-size: 30px;
+	margin-top: 50px;
+	text-align: center;
+	border: 1px solid black;
+	height: 450px;
+	padding-top: 20px;
+	margin-left: 20px;
+	background-color: white;
+}
+	
+#opacity{
+  
+}
+
+body{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+	background-color: white;
+	opacity: 0.5;
+  	top: 0;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
+  	position: absolute;
+  	z-index: -1;  
+}
