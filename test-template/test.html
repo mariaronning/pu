@@ -2,7 +2,6 @@
 <html>
 	<head>
 	<script type="text/javascript" src="../node_modules/mustache/mustache.js" ></script>
-		<script src="test.js"></script>
 	<title>Subject</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,11 +9,27 @@
 		<link rel="stylesheet" href= "test.css">
 	</head>
 	<body onload="loadtemp()">
-		 	<div id="opacity">
+		<div class="container">
+                <div class="navbar navbar-default navbar-fixed-top">
+                    <div class="container-fullwidth">
+                        <div class="navbar-collapse collapse">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"><img id="symbol" src="/images/symbol.png" alt="prepBot"></a>
+                        </div>
+                        <div class="navbar-form navbar-right">
+                            <button id="btnLogout" class="btn btn-action hide btn-default"> Log out </button>
+                        </div>
+                    </div>
+
 			<div class="container col-md-12" >
 				<div class= "row">
-					<div class = "col-md-11" id="course">
-						<p id="subject"></p>
+					<div class = "col-md-12" id="course">
+						<p id="subject">Datamodellering og databasesystemer </p>
 
 					</div>
 				</div>
@@ -35,6 +50,7 @@
 				</div>
 			</div>	
 		<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"> </script>
-      <script src="app.js?<?php echo time(); ?"></script>
+      <script src="../app.js?<?php echo time(); ?"></script>
+		<script src="test.js"></script>
 	</body>
 </html>
