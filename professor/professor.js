@@ -33,7 +33,6 @@ function createList(snap) {
 
     //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
-    a.href = "/subjectSite/subject.html";
     a.innerText = snap.key + " " + snap.val().name;
     li.className = "courseItems";
     a.style.color = "black";
@@ -42,6 +41,7 @@ function createList(snap) {
     div.style.paddingTop = "12px";
     div.style.borderBottom = "1px solid #C9C9C9";
     div.className = "col-md-12";
+    a.href = "/questionary/questions.html"+ "?id=" + snap.key;
 
 
 
@@ -64,7 +64,7 @@ function clearList() {
 btnLogout.addEventListener('click', e => {
 
   firebase.auth().signOut();
-  document.location.href = '../index.html';
+  document.location.href = '../index.html?<?php echo time(); ?';
 
 });
 
