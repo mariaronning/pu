@@ -1,5 +1,5 @@
 
-
+const btnLogout = document.getElementById('btnLogout');
 const searchValue = document.getElementById('sok');
 const preObject = document.getElementById('searchEnigne');
 const dbRefCourses = firebase.database().ref().child('Courses');
@@ -41,7 +41,7 @@ function createList(snap) {
     div.style.paddingTop = "12px";
     div.style.borderBottom = "1px solid #C9C9C9";
     div.className = "col-md-12";
-    a.href = "/questionary/questions.html"+ "?id=" + snap.key;
+    a.href = "/test-template/test.html"+ "?id=" + snap.key;
 
 
 
