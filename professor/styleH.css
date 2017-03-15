@@ -6,8 +6,6 @@
     -o-background-size: cover;
 }
 #courseSearch {
-    background-color: rgba(255,255,255,0.95);
-      border-radius: 5px;
       height: 400px;
 
 
@@ -15,7 +13,7 @@
 #searchResults {
     list-style-type: none;
     font-family: Dotum, arial;
-    font-size: 20px;
+    font-size: 18px;
 
 
 
@@ -27,5 +25,5 @@
 #searchForCourses {
     border-left: 1px solid grey;
     height: 400px;
-    width: 600px;
+    width: 650px;
 }

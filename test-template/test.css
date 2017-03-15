@@ -2,30 +2,44 @@
 #course{
 	font-family: monospace, "Courier New", serif;
 	font-size: 40px;
-	margin-top: 50px;
 	text-align: center;
 }
 
+#availableHeader {
+	font-size: 30px;
+	text-align: center;
+}
+
+
 #Availabletest{
 	font-family: monospace, "Courier New", serif;
-	font-size: 30px;
-	margin-top: 50px; 
-	text-align: center;
+	margin-top: 50px;
 	border: 1px solid gray;
 	height: 400px;
 	padding-top: 20px;
 	margin-left: 170px;
 	margin-right: 20px;
-	background-color: white;
 	box-shadow: 0 0 40px #888888;
 	border-radius: 5px;
 }
 
+.testLink {
+	color:black !important;
+	text-decoration: none;
+}
+.testLink:hover{
+	color:black;
+	font-weight: bold;
+	text-decoration: none;
+}
+#myresultsHeader {
+	font-size: 30px;
+	text-align: center;
+}
+
 #Myresults{
 	font-family: monospace, "Courier New", serif;
-	font-size: 30px;
 	margin-top: 50px;
-	text-align: center;
 	border: 1px solid gray;
 	height: 400px;
 	padding-top: 20px;
@@ -35,43 +49,39 @@
 }
 #Myresults:hover{
 	font-size: 30px;
-	border-color:white; 
-   
+	border-color:white;
+
     box-shadow: 0 0 60px #888888;
 	padding-top: 20px;
 	background-color:white ;
-	
+
 	border-radius: 10px;
-	
+
 }
 #Courseresults:hover{
 	font-size: 30px;
-	border-color:white; 
-   
+	border-color:white;
     box-shadow: 0 0 60px #888888;
 	padding-top: 20px;
 	background-color:white ;
 	border-radius: 10px;
 	border-radius: 10px;
-	
-	
 }
 #Availabletest:hover{
-	font-size: 30px;
-	border-color:white; 
-   
+	border-color:white;
     box-shadow: 0 0 60px #888888;
 	padding-top: 20px;
-	background-color:white ;
 	border-radius: 10px;
 	border-radius: 10px;
-	
+
+}
+#courseResultsHeader {
+	font-size: 30px;
+	text-align: center;
 }
 #Courseresults{
 	font-family: monospace, "Courier New", serif;
-	font-size: 30px;
 	margin-top: 50px;
-	text-align: center;
 	border: 1px solid gray;
 	height: 400px;
 	padding-top: 20px;
@@ -80,7 +90,7 @@
 	box-shadow: 0 0 40px #888888;
 	border-radius: 5px;
 }
-	
+
 
 subjectpage{
     -webkit-background-size: cover;
@@ -94,5 +104,5 @@ subjectpage{
   	bottom: 0;
   	right: 0;
   	position: absolute;
-  	z-index: -1;  
+  	z-index: -1;
 }

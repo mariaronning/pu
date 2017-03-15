@@ -2,9 +2,9 @@
   display: none;
 }
 
-body {
+#frontPage {
     font-family: 'Heebo', sans-serif;
-    background-image: url("test1.jpeg");
+    background-image: url("/images/test1.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -168,3 +168,9 @@ a:hover {
 }*/
 
 /*END PROFESSOR.HTML*/
+
+
+
+/*START QUESTIONARY.HTML */
+
+/*END QUESTIONARY.HTML*/

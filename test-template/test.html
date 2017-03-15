@@ -1,56 +1,67 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<script type="text/javascript" src="../node_modules/mustache/mustache.js" ></script>
-	<title>Subject</title>
+		<title>Subject</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href= "test.css">
+		<link rel="stylesheet" type="text/css" href="../style.css">
 	</head>
-	<body onload="loadtemp()" id="subjectpage">
+	<body id="subjectpage">
 		<div class="container">
-                <div class="navbar navbar-default navbar-fixed-top">
-                    <div class="container-fullwidth">
-                        <div class="navbar-collapse collapse">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#"><img id="symbol" src="/images/symbol.png" alt="prepBot"></a>
+                        <a class="navbar-brand" href="#"><img id="symbol" src="/images/symbol1.png" alt="prepBot"></a>
                         </div>
                         <div class="navbar-form navbar-right">
-                            <button id="btnLogout" class="btn btn-action hide btn-default"> Log out </button>
+                            <button id="btnLogout" class="btn btn-action btn-default"> Log out </button>
+                        </div>
+                        <div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a id="userID"></a></li>
+                            </ul>
                         </div>
                     </div>
-
-			<div class="container col-md-12" >
-				<div class= "row">
-					<div class = "col-md-12" id="course">
-						<p id="subject">Datamodellering og databasesystemer </p>
-
-					</div>
-				</div>
-				<div class ="row"> 
-					<div class = "col-md-3" id="Availabletest">
-						<p> Available Tests</p>
-					</div>
-
-					<div class = "col-md-3" id="Myresults">
-						<p> My Results</p>
-					</div>
-
-					<div class = "col-md-3" id="Courseresults">
-						<p> Course Results</p>
-					</div>
+                </nav>
+            </div>
+        </div>
+		<div class="container col-md-12"  style="margin-top:7%;">
+			<div class= "row">
+				<div class = "col-md-12" id="course">
+					<p id="subject"></p>
 
 				</div>
+			</div>
+			<div class ="row">
+				<div class = "col-md-3" id="Availabletest">
+					<p id="availableHeader"> Available Tests</p>
+					<p><a id="random" class="testLink">Randomized test</a></p>
+					<p><a id="level1" class="testLink">Level 1</a></p>
+					<p><a id="level2" class="testLink">Level 2</a></p>
+					<p><a id="level3" class="testLink">Level 3</a></p>
 				</div>
-			</div>	
+
+				<div class="col-md-3" id="Myresults">
+					<p id="myresultsHeader"> My Results</p>
+				</div>
+
+				<div class = "col-md-3" id="Courseresults">
+					<p id="courseResultsHeader"> Course Results</p>
+				</div>
+			</div>
+		</div>
 		<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"> </script>
-      <script src="../app.js?<?php echo time(); ?"></script>
+	  	<script src="../app.js?<?php echo time(); ?"></script>
 		<script src="test.js"></script>
 	</body>
 </html>
