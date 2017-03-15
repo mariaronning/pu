@@ -1,0 +1,31 @@
+#form{
+	margin-bottom: 7%;
+}
+
+#create{
+	text-align: center;
+	font-family:monospace, "Courier New", serif;
+	font-size: 25px;
+	margin-top: 5%; 
+}
+
+#Questionsheader{
+	font-weight: bold;
+	font-size: 20px;
+}
+#Infoheader{
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#infotext{
+	border: 3px lightgray;
+	font-family:monospace, "Courier New", serif;
+	text-align: center;
+	
+}
+
+#submit{
+	float: right;
+	
+}
