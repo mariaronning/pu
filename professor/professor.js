@@ -30,21 +30,29 @@ function createList(snap) {
     const li = document.createElement('li');
     const div = document.createElement('div');
     const a = document.createElement('a');
+    const button = document.createElement('button');
+    const span = document.createElement('span');
 
     li.id = snap.key;
+    button.id = sap.key;
     a.innerText = snap.key + " " + snap.val().name;
     li.className = "courseItems";
+    button.className = "btn btn-default";
+    span.className = "glyphicon glyphicon-plus";
     a.style.color = "black";
     a.style.textDecoration = "none";
     div.style.height = "50px";
     div.style.paddingTop = "12px";
     div.style.borderBottom = "1px solid #C9C9C9";
     div.className = "col-md-12";
+    button.style.float = "right"
     a.href = "/test-template/test.html"+ "?id=" + snap.key;
 
     searchResults.appendChild(div);
     div.appendChild(li);
     li.appendChild(a);
+    div.appendChild(button);
+    button.appendChild(span);
 }
 
 //Clears the list when search value is empty

@@ -30,24 +30,32 @@ function createList(snap) {
     const li = document.createElement('li');
     const div = document.createElement('div');
     const a = document.createElement('a');
+    const aButton = document.createElement('a');
+    const span = document.createElement('span');
 
-    //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
+    aButton.id = snap.key;
     a.innerText = snap.key + " " + snap.val().name;
     li.className = "courseItems";
+
+    span.className = "glyphicon glyphicon-plus";
     a.style.color = "black";
     a.style.textDecoration = "none";
+    aButton.style.color = "black";
+    aButton.style.textDecoration = "none";
     div.style.height = "50px";
     div.style.paddingTop = "12px";
     div.style.borderBottom = "1px solid #C9C9C9";
     div.className = "col-md-12";
+    li.style.float = "left";
+    aButton.style.float = "right";
     a.href = "/test-template/test.html"+ "?id=" + snap.key;
-
-
 
     searchResults.appendChild(div);
     div.appendChild(li);
     li.appendChild(a);
+    div.appendChild(aButton);
+    aButton.appendChild(span);
 }
 
 //Clears the list when search value is empty
