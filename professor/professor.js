@@ -1,5 +1,5 @@
 
-
+const btnLogout = document.getElementById('btnLogout');
 const searchValue = document.getElementById('sok');
 const preObject = document.getElementById('searchEnigne');
 const dbRefCourses = firebase.database().ref().child('Courses');
@@ -31,9 +31,7 @@ function createList(snap) {
     const div = document.createElement('div');
     const a = document.createElement('a');
 
-    //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
-    a.href = "/subjectSite/subject.html";
     a.innerText = snap.key + " " + snap.val().name;
     li.className = "courseItems";
     a.style.color = "black";
@@ -42,8 +40,7 @@ function createList(snap) {
     div.style.paddingTop = "12px";
     div.style.borderBottom = "1px solid #C9C9C9";
     div.className = "col-md-12";
-
-
+    a.href = "/test-template/test.html"+ "?id=" + snap.key;
 
     searchResults.appendChild(div);
     div.appendChild(li);
@@ -64,7 +61,7 @@ function clearList() {
 btnLogout.addEventListener('click', e => {
 
   firebase.auth().signOut();
-  document.location.href = '../index.html';
+  document.location.href = '../index.html?<?php echo time(); ?';
 
 });
 

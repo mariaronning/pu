@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>prepBot</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
-        <script type="text/javascript" src="../js/mustache.js" ></script>
+        <link rel="stylesheet" type="text/css" href="questions.css">
         <script src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -38,31 +38,21 @@
         </div>
         <div class="container" style="margin-top:5%;">
             <div class="row">
-                <div class="col-md-6 col-md-offset-5">
-                    <h1 >Lecturer</h1> <br>
+                <div id="subjectHeader" class="col-md-6 col-md-offset-3">
+                    <h1 id="courseId"></h1> <br>
                 </div>
             </div>
             <div class="row">
-                <div id="courseSearch" class="col-md-10 col-md-offset-1">
-                    <div id="mycourses" class="col-md-3">
-                        <h3>My courses </h3>
-
+                <div id="questionary" class="col-md-6 col-md-offset-2">
+                    <div id="question" class="col-md-12">
+                        <p></p>
                     </div>
-
-
-                    <div id="searchForCourses" class="col-md-7">
-                        <div class="col-md-12">
-                            <h3>Search for courses:</h3><br>
-                        </div>
-                        <div class="col-md-12 form-inline">
-        			        <input id="sok" type="text" class="form-control" placeholder="Search" style="width:100%;">
-                        </div>
-
-                        <div class="col-md-12 list-group" id="searchEngine">
-                            <ul id="searchResults" class="list-group">
-
-                            </ul>
-                        </div>
+                    <div id="answer" class="col-md-12">
+                        <ul id="answerList"></ul>
+                    </div>
+                    <div id="next" class="col-md-12">
+                        <button id="buttonNext" class="btn btn-action btn-default" disabled> Next</button>
+                        <button id="buttonAnswer" class="btn btn-action btn-default" disabled> Answer</button>
                     </div>
                 </div>
             </div>
@@ -71,8 +61,8 @@
 
       <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
       <script src="../app.js?<?php echo time(); ?"></script>
-      <script src="professor.js?<?php echo time(); ?"></script>
-      <link rel="stylesheet" type="text/css" href="styleH.css">
+      <script src="questions.js?<?php echo time(); ?" ></script>
+
     </body>
 
 </html>

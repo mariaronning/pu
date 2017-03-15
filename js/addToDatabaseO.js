@@ -1,4 +1,4 @@
-//Script for loading json objects from Overflow into our database. 
+//Script for loading json objects from Overflow into our database.
 var database = firebase.database();
 
 function getData(name) {
@@ -31,16 +31,18 @@ function getData(name) {
                     else if(sum == 2) {
                         addToDatabase2(name, courseData.questions[key], list[0]);
                     }
+                } else {
+                    if(sum == 4){
+                        addToDatabase4(name, courseData.questions[key], list);
+                    }
+                    else if(sum == 3) {
+                        addToDatabase3(name, courseData.questions[key], list);
+                    }
+                    else if(sum == 2) {
+                        addToDatabase2(name, courseData.questions[key], list);
+                    }
                 }
-                if(sum == 4){
-                    addToDatabase4(name, courseData.questions[key], list);
-                }
-                else if(sum == 3) {
-                    addToDatabase3(name, courseData.questions[key], list);
-                }
-                else if(sum == 2) {
-                    addToDatabase2(name, courseData.questions[key], list);
-                }
+
             }
         }
     }
@@ -85,7 +87,7 @@ function addToDatabase2(course, course_questions, correctAnswer) {
     });
 };
 
-
+//getData("HLS0001"); Remember _overflow
 //getData("TDT4242");
 //getData("IT2805");
 //getData("MFEL1010");
@@ -98,6 +100,7 @@ function addToDatabase2(course, course_questions, correctAnswer) {
 //getData("TDT4175");
 //getData("TDT4180");
 //getData("TDT4186");
+//getData("TDT4242");
 //getData("TDT4252");
 //getData("TIØ4258");
 //getData("TTM4100");

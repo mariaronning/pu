@@ -32,4 +32,5 @@ function addToDatabase(course, course_questions, course_answer, correctAnswer) {
 
 
 
-getData("ttm4100_v07.json", "TTM4100");
+
+//getData("ttm4100_v07.json", "TTM4100");

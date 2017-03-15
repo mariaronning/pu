@@ -1,0 +1,48 @@
+#subjectHeader {
+    width:600px;
+    height: 90px;
+    text-align: center;
+    margin-top: 8px;
+    color: #454747;
+
+} 
+#questionary {
+    width:800px;
+    height: 400px;
+    background-color: rgba(33, 207 , 208, 0.1);
+    box-shadow: 0 0 40px #888888;
+}
+#next {
+    height: 40px;
+}
+
+#buttonNext {
+    float: right;
+}
+#buttonAnswer {
+    float: right;
+}
+
+#question {
+    height: 60px;
+    padding-top: 2%;
+    margin-top: 3%;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#answer {
+    height: 220px;
+}
+
+#answerList {
+    list-style-type: none;
+    padding-top: 3%;
+
+}
+
+#answerList li {
+    height:50px;
+    font-size: 15px;
+
+}
