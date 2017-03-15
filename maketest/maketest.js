@@ -29,6 +29,22 @@ Addbutton.addEventListener("click", function renderquestion(){
 	answertext.type="text";
 	answertext.className="form-control";
 	answertext.rows = "12"; 
+	
+	//creating label and inpur-field for filling in the correct answer(s).
+	var space2=document.createElement("br");
+	var div3= document.createElement("div"); 
+	div3.className ="form group col-md-13";
+	div3.id = "answer" + counter; 
+	var correctans= document.createElement("LABEL"); 
+	correctans.name="correctanswer"; 
+	correctans.innerText="Correct Answer";
+	var correcttext = document.createElement("input");
+	correcttext.placeholder="Write the correct answer, a number between 1-4, divided be comma if several is correct";
+	correcttext.type="text"; 
+	correcttext.className="form-control";
+	
+
+	
 
 	counter++; 
 	
@@ -36,9 +52,13 @@ Addbutton.addEventListener("click", function renderquestion(){
 	div1.appendChild(space);
 	sporsmol.appendChild(div1);
 	sporsmol.appendChild(div2);
+	sporsmol.appendChild(div3);
 	div1.appendChild(question);
 	div1.appendChild(questiontext);
 	div1.appendChild(space1);
 	div2.appendChild(answer);
 	div2.appendChild(answertext);
+	div3.append(space2); 
+	div3.appendChild(correctans); 
+	div3.appendChild(correcttext);
 });
