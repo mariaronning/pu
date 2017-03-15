@@ -15,7 +15,11 @@
 #next {
     height: 40px;
 }
-#button {
+
+#buttonNext {
+    float: right;
+}
+#buttonAnswer {
     float: right;
 }
 

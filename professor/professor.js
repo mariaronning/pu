@@ -31,7 +31,6 @@ function createList(snap) {
     const div = document.createElement('div');
     const a = document.createElement('a');
 
-    //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
     a.innerText = snap.key + " " + snap.val().name;
     li.className = "courseItems";
@@ -42,8 +41,6 @@ function createList(snap) {
     div.style.borderBottom = "1px solid #C9C9C9";
     div.className = "col-md-12";
     a.href = "/test-template/test.html"+ "?id=" + snap.key;
-
-
 
     searchResults.appendChild(div);
     div.appendChild(li);
