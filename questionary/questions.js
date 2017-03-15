@@ -55,7 +55,7 @@ function questions() {
         correct = snap.val().questions[list[random]].correct;
         var start ="";
         if(correct.constructor === Array) {
-             start = "<input type='checkbox' name='checkAnswer[]'";
+             start = "<input type='checkbox' name='checkAnswer' ";
         }
         else {
             start= "<input type='radio' name='groupAnswer' ";
@@ -67,28 +67,27 @@ function questions() {
         }
     });
 }
-
+//Checks whether a radio button is checked and returns the value;
 function checkAnswerRadio() {
     return $('input[name=groupAnswer]:checked', '#answerList').val();
 }
 
+//Returns a list of the values of the checked checkboxes
 function checkAnswerCheckbox() {
-    var answeredValues = new Set();
-    $('input[name="checkAnswer[]"]').each(function() {
-        if ($(this).is(":checked")) {
-            answeredValues.add(this.value);
+    var answeredValues = new Array();
+    var checkboxes = document.getElementsByName("checkAnswer");
+    for(var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            answeredValues.push(checkboxes[i].value);
         }
-    });
-    console.log(answeredValues.length);
-    for(var key in answeredValues) {
-        console.log(answeredValues[key]);
     }
     return answeredValues;
 }
 
+//Checks whether anyy of the checkboxes are checked
 function booleanChecked() {
     var checked = false;
-    $('input[name="checkAnswer[]"]').each(function() {
+    $('input[name="checkAnswer"]').each(function() {
         if ($(this).is(":checked")) {
             checked = true;
         }
@@ -104,6 +103,7 @@ $(function(){
     });
     $('#buttonNext').click(function(){
         questions();
+        $('#buttonNext').prop('disabled', true);
     });
     $('#answerList').change(function () {
         if(correct.constructor === Array) {
@@ -111,15 +111,6 @@ $(function(){
             var checked = booleanChecked();
             if(checked) {
                 $('#buttonAnswer').removeAttr('disabled');
-                $('#buttonAnswer').click(function() {
-                    if(checked) {
-                        var answered = checkAnswerCheckbox();
-                        $('#buttonAnswer').removeAttr('disabled');
-                        for(var key in answered) {
-                            console.log(answered[key]);
-                        }
-                    }
-                });
             }
         }
         else {
@@ -128,16 +119,36 @@ $(function(){
                 var answered = checkAnswerRadio();
                 if(correct == answered) {
                     $('#' + answered).css('color', 'green');
-                    console.log("Korrekt");
                 }
                 else {
                     $('#' + answered).css('color', 'red');
                     $('#' + correct).css('color', 'green');
-                    console.log("False");
                 }
-
+                $('#buttonAnswer').prop('disabled', true);
                 $('#buttonNext').removeAttr('disabled');
             });
         }
+    });
+
+    //Gives user feedback to wrong/right answer
+    $('#buttonAnswer').click(function() {
+        if(correct.constructor === Array) {
+            var answered = checkAnswerCheckbox();
+            var checkboxes = document.getElementsByName("checkAnswer");
+            for(var i = 0; i < checkboxes.length; i++) {
+                var li = document.getElementById(i);
+                if(correct.indexOf(checkboxes[i].value) > -1 && answered.indexOf(checkboxes[i].value) > -1) {
+                    li.style.color = "green";
+                } else if(correct.indexOf(checkboxes[i].value) > -1 && answered.indexOf(checkboxes[i].value) == -1) {
+                    li.style.color = "green";
+                }
+                else if(correct.indexOf(checkboxes[i].value) == -1 && answered.indexOf(checkboxes[i].value) > -1) {
+                    li.style.color = "red";
+                }
+            }
+            $('#buttonAnswer').prop('disabled', true);
+            $('#buttonNext').removeAttr('disabled');
+        }
+
     });
 });
