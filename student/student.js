@@ -34,12 +34,12 @@ function createList(snap) {
     
     //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
+    //check length of name, and cut string if needed
     if (snap.val().name.length > 48) {
         a.innerText = snap.key + " " + snap.val().name.substring(0,48) + "...";
     } else {
         a.innerText = snap.key + " " + snap.val().name;
     }
-    //a.innerText = snap.key + " " + snap.val().name.substring(0,50) + "...";
     li.className = "courseItems";
     a.style.color = "black";
     a.style.textDecoration = "none";
