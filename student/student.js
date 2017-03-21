@@ -31,9 +31,15 @@ function createList(snap) {
     const div = document.createElement('div');
     const a = document.createElement('a');
 
+    
     //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
-    a.innerText = snap.key + " " + snap.val().name;
+    if (snap.val().name.length > 48) {
+        a.innerText = snap.key + " " + snap.val().name.substring(0,48) + "...";
+    } else {
+        a.innerText = snap.key + " " + snap.val().name;
+    }
+    //a.innerText = snap.key + " " + snap.val().name.substring(0,50) + "...";
     li.className = "courseItems";
     a.style.color = "black";
     a.style.textDecoration = "none";
