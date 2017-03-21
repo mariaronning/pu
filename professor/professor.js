@@ -5,7 +5,7 @@ const preObject = document.getElementById('searchEnigne');
 const dbRefCourses = firebase.database().ref().child('Courses');
 const searchResults = document.getElementById('searchResults');
 const userId = document.getElementById("userID");
-
+ 
 //Listen for change in search value
 searchValue.addEventListener('input', e => {
     if(searchValue.value == "") {

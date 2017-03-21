@@ -88,19 +88,19 @@ function addToDatabase2(course, course_questions, correctAnswer) {
 };
 
 //getData("HLS0001"); Remember _overflow
-//getData("TDT4242");
-//getData("IT2805");
-//getData("MFEL1010");
-//getData("MFEL1050");
-//getData("TDT4110");
-//getData("TDT4136");
-//getData("TDT4140");
-//getData("TDT4145");
-//getData("TDT4160");
-//getData("TDT4175");
-//getData("TDT4180");
-//getData("TDT4186");
-//getData("TDT4242");
-//getData("TDT4252");
-//getData("TIØ4258");
-//getData("TTM4100");
+setTimeout(getData("TDT4242"), 0);
+setTimeout(getData("IT2805"), 3000);
+setTimeout(getData("MFEL1010"), 9000);
+setTimeout(getData("MFEL1050"), 12000);
+setTimeout(getData("TDT4110"), 15000);
+setTimeout(getData("TDT4136"), 18000);
+setTimeout(getData("TDT4140"), 21000);
+setTimeout(getData("TDT4145"), 24000);
+setTimeout(getData("TDT4160"), 27000);
+setTimeout(getData("TDT4175"), 30000);
+setTimeout(getData("TDT4180"), 33000);
+setTimeout(getData("TDT4186"), 36000);
+setTimeout(getData("TDT4242"), 39000);
+setTimeout(getData("TDT4252"), 43000);
+setTimeout(getData("TIØ4258"), 45000);
+setTimeout(getData("TTM4100"), 48000);
