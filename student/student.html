@@ -8,7 +8,7 @@
         <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>
-    <body style="font-family: 'Heebo', sans-serif;">
+    <body style="font-family: 'Heebo', sans-serif;" id="studentBody">
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-default navbar-fixed-top">
@@ -35,13 +35,13 @@
                 </nav>
             </div>
         </div>
-        <div class="container" style="margin-top:5%;">
-            <div class="row" id="fade">
+        <div class="container" style="margin-top:6%;" id="fade">
+            <div class="row">
                 <div class="col-md-6 col-md-offset-5">
                     <h1 >Student</h1> <br>
                 </div>
             </div>
-            <div class="row" id="fade">
+            <div class="row">
                 <div id="courseSearch" class="col-md-10 col-md-offset-1">
                     <div id="mycourses" class="col-md-3">
                         <h3>My courses </h3>
@@ -73,10 +73,8 @@
             </div>
         </footer>
 
-        <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-        <script src="../app.js?<?php echo time(); ?"></script>
-        <script src="student.js?<?php echo time(); ?"></script>
-        <link rel="stylesheet" type="text/css" href="styleH.css">
+      <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+      <script src="../app.js?<?php echo time(); ?"></script>
+      <script src="student.js?<?php echo time(); ?"></script>
     </body>
-
 </html>
