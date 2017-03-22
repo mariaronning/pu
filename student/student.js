@@ -6,6 +6,7 @@ const dbRefCourses = firebase.database().ref().child('Courses');
 const dbRefUsers = firebase.database().ref().child('Users');
 const searchResults = document.getElementById('searchResults');
 const userId = document.getElementById('userID');
+const myCoursesOutput = document.getElementById('myCourseOutput');
 
 //Listen for change in search value
 searchValue.addEventListener('input', e => {
@@ -37,15 +38,15 @@ function createList(snap) {
     const aButton = document.createElement('button');
     const span = document.createElement('span');
 
-    //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
+    aButton.id = snap.key;
     //check length of name, and cut string if needed
     if (snap.val().name.length > 48) {
         a.innerText = snap.key + " " + snap.val().name.substring(0,48) + "...";
     } else {
         a.innerText = snap.key + " " + snap.val().name;
     }
-    li.className = "courseItems";   
+    li.className = "courseItems";
     span.className = "glyphicon glyphicon-plus";
     a.style.color = "black";
     a.style.textDecoration = "none";
@@ -68,24 +69,6 @@ function createList(snap) {
 
 }
 
-
-
-/*
-var courseClicked;
-function getID() {
-    var buttons = document.getElementsByClassName('plusButton');
-    var array = new Array();
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function() {
-            courseClicked = this.id;
-            return this.id;
-        });
-    }
-
-};*/
-
-
-
 //Clears the list when search value is empty
 function clearList() {
     if (searchResults) {
@@ -95,16 +78,6 @@ function clearList() {
     }
 }
 
-
-
-//Logs out the user
-btnLogout.addEventListener('click', e => {
-
-  firebase.auth().signOut();
-  document.location.href = '../index.html?<?php echo time(); ?';
-
-});
-
 //Creates user in database if user is not already registrered.
 function createUser(user, emailUser) {
     firebase.database().ref("Users/" + user).set({
@@ -113,32 +86,51 @@ function createUser(user, emailUser) {
 }
 
 
+//Checks if user is already registrered in database
 function checkIfUser(userid, email) {
     dbRefUsers.once('value', snap => {
         if (snap.hasChild(userid)) {
-
+            getmyCoursesDatabase(userid);
         } else {
             createUser(userid, email);
         }
     });
 }
-function checkIfCourse(userid, course) {
 
-    dbRefUsers.child(userid).child('courses').once('value', snap => {
-        for(var key in snap.val()) {
-            if (snap.val()[key].course == course) {
-                console.log(course);
-                console.log("true");
-                return true;
-            } else {
-                console.log("false");
-                console.log(course);
-                return false;
-            }
+//Function that writes to myCoursesOutput list in the html document
+function createListMyCourses(courseId) {
+    const li = document.createElement('li');
+    const div = document.createElement('div');
+    const a = document.createElement('a');
+    const span = document.createElement('span');
 
-        }
-    });
+    span.className = "glyphicon glyphicon-ok";
+    span.style.volor="green";
+    li.id = courseId;
+    a.innerText = " " + courseId;
+    a.style.textDecoration = "none";
+    a.style.color = "black";
+    li.style.textDecoration = "none";
+    div.className = "col-md-12";
+    div.style.paddingLeft = "12%";
+    a.href = "/test-template/test.html"+ "?id=" + courseId;
+    li.style.float = "left";
+
+
+
+    myCoursesOutput.appendChild(div);
+    div.appendChild(li);
+    li.appendChild(span);
+    li.appendChild(a);
 }
+
+//Gets all courses added by the current user and fires a fucntion that writes the courses to html
+function getmyCoursesDatabase(user) {
+    firebase.database().ref("Users/" + user + "/courses").limitToFirst(10).on('child_added', snap => {
+        createListMyCourses(snap.val().course);
+    });
+};
+
 
 //Writes the course clicked to databse
 function setCoursesDatabase(user, courseId) {
@@ -147,23 +139,38 @@ function setCoursesDatabase(user, courseId) {
     });
 };
 
-//Gets id of button clicked and sends this to a function that writes the value to the database.
+//Gets id of button clicked and writes the value to the database if not already added.
 function getID() {
     $(".plusButton").unbind().click(function(event) {
-        var check =  await checkIfCourse(user, event.currentTarget.attributes[0].nodeValue);
-        console.log("HEI");
-        if (check == true) {
-            console.log("true");
+    	var check = false;
+        course = event.currentTarget.attributes[0].nodeValue;
+        console.log(course);
+    	dbRefUsers.child(user).child('courses').once('value', snap => {
+            for(var key in snap.val()) {
+                console.log(snap.val()[key].course)
+                if (snap.val()[key].course == course) {
+                    check = true;
+                    break;
+                } else {
+                    check = false;
+                }
 
-        } else {
-            console.log("false");
-            //setCoursesDatabase(user, event.currentTarget.attributes[0].nodeValue);
-        }
-        console.log("HADE");
-
+            }
+            if (check == true) {
+            } else {
+                setCoursesDatabase(user, event.currentTarget.attributes[0].nodeValue);
+            }
+        });
     });
 }
 
+//Logs out the user
+btnLogout.addEventListener('click', e => {
+
+  firebase.auth().signOut();
+  document.location.href = '../index.html?<?php echo time(); ?';
+
+});
 
 var user;
 
