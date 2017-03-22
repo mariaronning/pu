@@ -1,6 +1,7 @@
 var Addbutton = document.getElementById("Add"); //getting the add button from the html file, to be able to use it. 
 var counter=1; //counter variable to get the right id on the questions being made. 
 var sporsmol = document.getElementById("sporsmol");//getting the div i want the new questins and answers to lay in. 
+var submitbutton = document.getElementById("submit"); 
 Addbutton.addEventListener("click", function renderquestion(){
 	
 	//creating a question label and input-field for writing a new question.
@@ -14,7 +15,7 @@ Addbutton.addEventListener("click", function renderquestion(){
 	var questiontext = document.createElement("input");
 	questiontext.placeholder = "Write your question"; 
 	questiontext.type="text";
-	questiontext.className="form-control";
+	questiontext.className="form-control questions";
 	var space1= document.createElement("br");
 	
 	//creating answer label and a text-area for writing an answer to the question.
@@ -27,7 +28,7 @@ Addbutton.addEventListener("click", function renderquestion(){
 	var answertext = document.createElement("textarea");
 	answertext.placeholder = "Write your answer"; 
 	answertext.type="text";
-	answertext.className="form-control";
+	answertext.className="form-control answers";
 	answertext.rows = "12"; 
 	
 	//creating label and inpur-field for filling in the correct answer(s).
@@ -41,7 +42,7 @@ Addbutton.addEventListener("click", function renderquestion(){
 	var correcttext = document.createElement("input");
 	correcttext.placeholder="Write the correct answer, a number between 1-4, divided be comma if several is correct";
 	correcttext.type="text"; 
-	correcttext.className="form-control";
+	correcttext.className="form-control rightanswers";
 	
 
 	
@@ -62,3 +63,38 @@ Addbutton.addEventListener("click", function renderquestion(){
 	div3.appendChild(correctans); 
 	div3.appendChild(correcttext);
 });
+
+
+ 
+submitbutton.addEventListener("click",function savetest(){
+	var Questions= (document.getElementsByClassName("form-control questions"));
+    var title = (document.getElementsByClassName("form-control title"))[0].value;
+    var course = document.getElementsByClassName("form-control course")[0].value;
+    var answers = (document.getElementsByClassName("form-control answers"));
+    var Questiontext= new Array();
+    var answertext = new Array();
+    var atq=new Array();
+    var atqsplit = new Array();
+    for(i=0; i < Questions.length;i++){
+        Questiontext.push(Questions[i].value);
+    }; 
+    for(i=0; i < answers.length;i++){
+        atq.push(answers[i].value);
+        atqsplit = atq[i].split(",");
+        for(j=0; j<atqsplit.length;j++){
+            answertext.push(atqsplit[j]);
+        }
+        
+        atq=[];
+        atqsplit=[];
+   };
+    
+    console.log(title);
+    console.log(course);
+	console.log(Questiontext);
+    console.log(answertext);
+    
+    
+    
+});
+

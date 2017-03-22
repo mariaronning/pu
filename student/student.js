@@ -37,11 +37,15 @@ function createList(snap) {
     const aButton = document.createElement('button');
     const span = document.createElement('span');
 
+    //li.innerText = snap.key + " " + snap.val().name;
     li.id = snap.key;
-    aButton.id = snap.key;
-    a.innerText = snap.key + " " + snap.val().name;
-    li.className = "courseItems";
-
+    //check length of name, and cut string if needed
+    if (snap.val().name.length > 48) {
+        a.innerText = snap.key + " " + snap.val().name.substring(0,48) + "...";
+    } else {
+        a.innerText = snap.key + " " + snap.val().name;
+    }
+    li.className = "courseItems";   
     span.className = "glyphicon glyphicon-plus";
     a.style.color = "black";
     a.style.textDecoration = "none";
@@ -146,7 +150,7 @@ function setCoursesDatabase(user, courseId) {
 //Gets id of button clicked and sends this to a function that writes the value to the database.
 function getID() {
     $(".plusButton").unbind().click(function(event) {
-        var check = checkIfCourse(user, event.currentTarget.attributes[0].nodeValue);
+        var check =  await checkIfCourse(user, event.currentTarget.attributes[0].nodeValue);
         console.log("HEI");
         if (check == true) {
             console.log("true");
