@@ -5,7 +5,7 @@ const preObject = document.getElementById('searchEnigne');
 const dbRefCourses = firebase.database().ref().child('Courses');
 const searchResults = document.getElementById('searchResults');
 const userId = document.getElementById("userID");
-
+ 
 //Listen for change in search value
 searchValue.addEventListener('input', e => {
     if(searchValue.value == "") {
@@ -30,21 +30,38 @@ function createList(snap) {
     const li = document.createElement('li');
     const div = document.createElement('div');
     const a = document.createElement('a');
+    const button = document.createElement('button');
+    const span = document.createElement('span');
 
     li.id = snap.key;
+<<<<<<< HEAD
+    button.id = sap.key;
     a.innerText = snap.key + " " + snap.val().name;
+=======
+    //check length of name, and cut string if needed
+    if (snap.val().name.length > 48) {
+        a.innerText = snap.key + " " + snap.val().name.substring(0,48) + "...";
+    } else {
+        a.innerText = snap.key + " " + snap.val().name;
+    }
+>>>>>>> f334c2eb2dcd651cb35ae32d0dca5d56b65efbe5
     li.className = "courseItems";
+    button.className = "btn btn-default";
+    span.className = "glyphicon glyphicon-plus";
     a.style.color = "black";
     a.style.textDecoration = "none";
     div.style.height = "50px";
     div.style.paddingTop = "12px";
     div.style.borderBottom = "1px solid #C9C9C9";
     div.className = "col-md-12";
+    button.style.float = "right"
     a.href = "/test-template/test.html"+ "?id=" + snap.key;
 
     searchResults.appendChild(div);
     div.appendChild(li);
     li.appendChild(a);
+    div.appendChild(button);
+    button.appendChild(span);
 }
 
 //Clears the list when search value is empty
