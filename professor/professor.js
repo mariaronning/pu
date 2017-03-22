@@ -34,17 +34,15 @@ function createList(snap) {
     const span = document.createElement('span');
 
     li.id = snap.key;
-<<<<<<< HEAD
+
     button.id = sap.key;
     a.innerText = snap.key + " " + snap.val().name;
-=======
     //check length of name, and cut string if needed
     if (snap.val().name.length > 48) {
         a.innerText = snap.key + " " + snap.val().name.substring(0,48) + "...";
     } else {
         a.innerText = snap.key + " " + snap.val().name;
     }
->>>>>>> f334c2eb2dcd651cb35ae32d0dca5d56b65efbe5
     li.className = "courseItems";
     button.className = "btn btn-default";
     span.className = "glyphicon glyphicon-plus";
