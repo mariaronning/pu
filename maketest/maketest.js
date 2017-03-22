@@ -42,7 +42,7 @@ Addbutton.addEventListener("click", function renderquestion(){
 	var correcttext = document.createElement("input");
 	correcttext.placeholder="Write the correct answer, a number between 1-4, divided be comma if several is correct";
 	correcttext.type="text"; 
-	correcttext.className="form-control rightanswers";
+	correcttext.className="form-control correctanswers";
 	
 
 	
@@ -65,36 +65,98 @@ Addbutton.addEventListener("click", function renderquestion(){
 });
 
 
- 
 submitbutton.addEventListener("click",function savetest(){
-	var Questions= (document.getElementsByClassName("form-control questions"));
+	var Questions = (document.getElementsByClassName("form-control questions"));
     var title = (document.getElementsByClassName("form-control title"))[0].value;
     var course = document.getElementsByClassName("form-control course")[0].value;
     var answers = (document.getElementsByClassName("form-control answers"));
+    var correctAnswers =  (document.getElementsByClassName("form-control correctanswers"));
     var Questiontext= new Array();
     var answertext = new Array();
-    var atq=new Array();
+    var correctAnswersText = new Array();
+    var atq = [];
     var atqsplit = new Array();
+    var cta = [];
+    var ctasplit = new Array();
     for(i=0; i < Questions.length;i++){
         Questiontext.push(Questions[i].value);
     }; 
     for(i=0; i < answers.length;i++){
-        atq.push(answers[i].value);
-        atqsplit = atq[i].split(",");
-        for(j=0; j<atqsplit.length;j++){
-            answertext.push(atqsplit[j]);
+        answertext[i]=[];
+        atq = (answers[i].value);
+        atqsplit = atq.split(", ");
+        for(j = 0; j < atqsplit.length; j++){
+        answertext[i][j] = atqsplit[j];
         }
         
-        atq=[];
         atqsplit=[];
-   };
-    
-    console.log(title);
-    console.log(course);
-	console.log(Questiontext);
-    console.log(answertext);
-    
-    
+   }; 
+    for(i=0; i < correctAnswers.length; i++){
+        correctAnswersText[i] = [];
+        ctq = correctAnswers[i].value;
+        ctqsplit = ctq.split(", ");
+        for(j = 0; j < ctqsplit.length; j++){
+            correctAnswersText[i][j] = ctqsplit[j];
+        }
+        
+    }
     
 });
+
+const searchResults = document.getElementById('searchResults1'); 
+const searchValue = document.getElementById('Coursename'); 
+const dbRefCourses = firebase.database().ref().child('Courses');    
+
+//Listen for change in search value
+if(searchValue){
+searchValue.addEventListener('input', e => {
+    if(searchValue.value == "") {
+        clearList();
+    } else {
+        clearList();
+        fireSearch(searchValue.value.toUpperCase(), 6);
+    }
+
+})
+};
+
+//Searches the database and returns matching courses, maximum of 6 elements
+function fireSearch(startValue, limit) {
+    dbRefCourses.orderByKey().startAt(startValue)
+    .endAt(startValue + "\uf8ff").limitToFirst(limit).on("child_added", snap => {
+        createList(snap);
+    });
+};
+
+//Creates a list with matching elements from fireSearch
+function createList(snap) {
+    const li = document.createElement('li');
+    const div = document.createElement('div');
+    const a = document.createElement('a');
+
+    li.id = snap.key;
+    a.innerText = snap.key + " " + snap.val().name;
+    li.className = "courseItems";
+    a.style.color = "black";
+    a.style.textDecoration = "none";
+    div.style.height = "50px";
+    div.style.paddingTop = "12px";
+    div.style.borderBottom = "1px solid #C9C9C9";
+    div.className = "col-md-12";
+    a.href = "/test-template/test.html"+ "?id=" + snap.key;
+
+    searchResults.appendChild(div);
+    div.appendChild(li);
+    li.appendChild(a);
+}
+
+//Clears the list when search value is empty
+function clearList() {
+    if (searchResults) {
+        while (searchResults.firstChild) {
+            searchResults.removeChild(searchResults.firstChild);
+        }
+    }
+}
+
 
