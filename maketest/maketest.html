@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>prepBot</title>
-		<!--<link rel="stylesheet" type="text/css" href="../style.css">-->
+		<link rel="stylesheet" type="text/css" href="../style.css">
 
         <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -56,6 +56,11 @@
 							<label for="Course">Course</label>
 							<input type="text" class="form-control course" id="Coursename" placeholder="Course name">
 						</div>
+                        <div class="col-md-12 list-group" id="searchEngine">
+                            <ul id="searchResults1" class="list-group">
+
+                            </ul>
+                        </div>
 						<div id="info">
 							<p id=Questionsheader> Questions </p>
 							<p id="infotext">"Write your answers in the middel of "" signs maximum amount of alternatives is 4. Separate them with comma. </p>
@@ -103,13 +108,10 @@
 		
 		</div>
 
-
-
-    <link rel="stylesheet" type="text/css" href="../style.css">
-	<link rel="stylesheet" type="text/css" href="maketest.css">
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script src="../app.js?<?php echo time(); ?"></script>    
 	<script src="maketest.js" > </script>
-     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>-->
-      <script src="../app.js?<?php echo time(); ?"></script>
+  
       
 	
     </body>
