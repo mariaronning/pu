@@ -5,7 +5,7 @@
     margin-top: 8px;
     color: #454747;
 
-} 
+}
 #questionary {
     width:800px;
     height: 400px;
@@ -45,4 +45,9 @@
     height:50px;
     font-size: 15px;
 
+}
+
+#info {
+    font-style: italic;
+    margin-left: 35%;
 }

@@ -3,6 +3,8 @@ const btnLogout = document.getElementById('btnLogout');
 const courseHeader = document.getElementById('courseId');
 const answerList = document.getElementById('answerList');
 const questionP = document.getElementById('question');
+const questionary = document.getElementById('questionary');
+const info = document.getElementById('info');
 
 
 //Log out the user
@@ -40,6 +42,7 @@ function clearList() {
         while (answerList.firstChild) {
             answerList.removeChild(answerList.firstChild);
         }
+        info.removeChild(info.firstChild);
     }
 }
 var correct;
@@ -65,6 +68,7 @@ function questions() {
             $('#answerList').append("<li id='" + key + "'>" + start + "value=" + key + "> " +
                                                 answers[key] + "</li>");
         }
+        $('#info').append('<p> Number of answered questions: ' + answeredQuestions + '/' + total + ' </p>');
     });
 }
 //Checks whether a radio button is checked and returns the value;
@@ -94,7 +98,40 @@ function booleanChecked() {
     });
     return checked;
 }
+//Clears the div element after the test is finished.
+function clearDiv() {
+    if (questionary) {
+        while (questionary.firstChild) {
+            questionary.removeChild(questionary.firstChild);
+        }
+    }
+}
 
+function returnResults() {
+    const div = document.createElement('div');
+    const h1 = document.createElement('h1');
+    const pPoints = document.createElement('p');
+    const pAnswered = document.createElement('p');
+    const pPercentage = document.createElement('p');
+    div.className = 'col-md-12';
+    h1.innerText = 'Results';
+    div.style.paddingTop = '3%';
+    pPoints.innerText = 'Number of points: ' + points;
+    pAnswered.innerText = 'Number of questions answered: ' + answeredQuestions;
+    pPercentage.innerText = 'Percentage of right questions ' + round((points/answeredQuestions)*100, 0) + '%';
+
+    questionary.appendChild(div);
+    div.appendChild(h1);
+    div.appendChild(pPoints);
+    div.appendChild(pAnswered);
+    div.appendChild(pPercentage);
+
+}
+
+var counter = 0;
+var points = 0;
+var answeredQuestions = 0;
+var total = 4;
 
 //jQuery code that runs questions() on loading of website and on button click.
 $(function(){
@@ -102,7 +139,16 @@ $(function(){
         questions();
     });
     $('#buttonNext').click(function(){
-        questions();
+        answeredQuestions ++;
+        if(counter < total) {
+            questions();
+            counter ++;
+        }
+        if(counter == total) {
+            clearDiv();
+            returnResults();
+        }
+
         $('#buttonNext').prop('disabled', true);
     });
     $('#answerList').change(function () {
@@ -115,36 +161,49 @@ $(function(){
         }
         else {
             $('#buttonAnswer').removeAttr('disabled');
-            $('#buttonAnswer').click(function(){
-                var answered = checkAnswerRadio();
-                if(correct == answered) {
-                    $('#' + answered).css('color', 'green');
-                }
-                else {
-                    $('#' + answered).css('color', 'red');
-                    $('#' + correct).css('color', 'green');
-                }
-                $('#buttonAnswer').prop('disabled', true);
-                $('#buttonNext').removeAttr('disabled');
-            });
+
         }
+    });
+    //Gives user feedback if wrong/right
+    $('#buttonAnswer').click(function(){
+        var answered = checkAnswerRadio();
+        if(correct == answered) {
+            $('#' + answered).css('color', 'green');
+            points += 1;
+
+        }
+        else {
+            $('#' + answered).css('color', 'red');
+            $('#' + correct).css('color', 'green');
+        }
+        $('#buttonAnswer').prop('disabled', true);
+        $('#buttonNext').removeAttr('disabled');
     });
 
     //Gives user feedback to wrong/right answer
     $('#buttonAnswer').click(function() {
         if(correct.constructor === Array) {
+            var total = correct.length;
+            var tempPoints = 0;
             var answered = checkAnswerCheckbox();
             var checkboxes = document.getElementsByName("checkAnswer");
             for(var i = 0; i < checkboxes.length; i++) {
                 var li = document.getElementById(i);
                 if(correct.indexOf(checkboxes[i].value) > -1 && answered.indexOf(checkboxes[i].value) > -1) {
                     li.style.color = "green";
+                    tempPoints += 1;
                 } else if(correct.indexOf(checkboxes[i].value) > -1 && answered.indexOf(checkboxes[i].value) == -1) {
                     li.style.color = "green";
+                    tempPoints -= 0.5;
                 }
                 else if(correct.indexOf(checkboxes[i].value) == -1 && answered.indexOf(checkboxes[i].value) > -1) {
                     li.style.color = "red";
+                    tempPoints -= 0.5;
                 }
+            }
+            if (tempPoints > 0) {
+                points += round(tempPoints/total, 1);
+                //console.log(round(tempPoints/total, 1))
             }
             $('#buttonAnswer').prop('disabled', true);
             $('#buttonNext').removeAttr('disabled');
@@ -152,3 +211,8 @@ $(function(){
 
     });
 });
+
+function round(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+}
