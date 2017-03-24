@@ -2,9 +2,9 @@
   display: none;
 }
 
-#frontPage, #professorBody, #studentBody {
+#frontPage{
     font-family: 'Heebo', sans-serif;
-    background-image: url("/images/test2.jpg");
+    background-image: url("/images/mh.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -15,13 +15,13 @@
 .navbar-default {
     position: absolute;
     left: 0;
-    right: 0; 
+    right: 0;
     top: 0;
     text-align: center;
     opacity: 0.8;
-    background: rgba(0, 0, 0, 0.7) !important;
+    background: rgba(0, 0, 0, 0.95) !important;
     height: 60px !important;
-    border-width: 1 !important;
+    border-width: 0 !important;
     border-radius: 0 !important;
 
 }
@@ -53,7 +53,7 @@ label {
 .rectangle {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     float: none;
     align-content: center;
 
@@ -199,7 +199,7 @@ a:hover {
 	text-align: center;
 	font-family:monospace, "Courier New", serif;
 	font-size: 25px;
-	margin-top: 5%; 
+	margin-top: 5%;
 }
 
 #Questionsheader{
@@ -215,11 +215,11 @@ a:hover {
 	border: 3px lightgray;
 	font-family:monospace, "Courier New", serif;
 	text-align: center;
-	
+
 }
 
 #submit{
 	float: right;
-	
+
 }
 /* END MAKTETEST.HTML */

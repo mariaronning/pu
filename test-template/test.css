@@ -1,6 +1,6 @@
 
 #course{
-	font-family: monospace, "Courier New", serif;
+	/*font-family: monospace, "Courier New", serif;*/
 	font-size: 40px;
 	text-align: center;
 }
@@ -12,7 +12,7 @@
 
 
 #Availabletest{
-	font-family: monospace, "Courier New", serif;
+	/*font-family: monospace, "Courier New", serif;*/
 	margin-top: 50px;
 	border: 1px solid gray;
 	height: 400px;
@@ -38,7 +38,7 @@
 }
 
 #Myresults{
-	font-family: monospace, "Courier New", serif;
+	/*font-family: monospace, "Courier New", serif;*/
 	margin-top: 50px;
 	border: 1px solid gray;
 	height: 400px;
@@ -80,7 +80,7 @@
 	text-align: center;
 }
 #Courseresults{
-	font-family: monospace, "Courier New", serif;
+	/*font-family: monospace, "Courier New", serif;*/
 	margin-top: 50px;
 	border: 1px solid gray;
 	height: 400px;
