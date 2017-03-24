@@ -64,7 +64,11 @@ Addbutton.addEventListener("click", function renderquestion(){
 	div3.appendChild(correcttext);
 });
 
-
+//Hvis bare et svar alt må det lagres som int, hvis flere så må det lagres som liste
+//Må catche ting, og sørge for at inputs er riktig dvs med try og catch etc
+//sjekke for at svar stemmer med et svar alt. 
+//noen linjer fra student html skal til professor html;
+//js student til professor;
 submitbutton.addEventListener("click",function savetest(){
 	var Questions = (document.getElementsByClassName("form-control questions"));
     var title = (document.getElementsByClassName("form-control title"))[0].value;
