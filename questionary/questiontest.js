@@ -10,6 +10,7 @@ QUnit.test ('should return correct level', function(assert) {
 });
 
 
+
 QUnit.module('Checkbox tests');
 QUnit.test('should return false when checkbox is not checked', function(assert) {
     var checked = booleanChecked(false);
