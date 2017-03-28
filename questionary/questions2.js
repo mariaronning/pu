@@ -5,7 +5,7 @@ const answerList = document.getElementById('answerList');
 const questionP = document.getElementById('question');
 const questionary = document.getElementById('questionary');
 const info = document.getElementById('info');
-
+const dbRefPoints = firebase.database().ref().child('Courses/');
 
 //Log out the user
 btnLogout.addEventListener('click', e => {
@@ -27,14 +27,30 @@ function getUrlVars() {
 
 
 var value = getUrlVars()['id'];
+var levelid = getUrlVars()['level'];
 courseHeader.innerText = value;
-var list = new Array();
+
 //Create list of keys, in order to randomize questions
+var list = new Array();
+
+
 dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
     for(var key in snap.val().questions){
-        list.push(key);
+        if(levelid != "random") {
+            dbRefPoints.child(value + "/questions/" + key).once('value', snap => {
+                if (snap.hasChild("levelData")) {
+                    if(snap.val().level == parseInt(levelid)) {
+                        list.push(key);
+                    }
+                }
+            });
+        } else {
+            list.push(key);
+        }
     }
+    console.log(list.length)
 });
+console.log(list.length);
 
 //Clears Answers list of li elements/answers
 function clearList() {
@@ -46,6 +62,8 @@ function clearList() {
     }
 }
 var correct;
+var currentKey;
+
 
 //When next is clicked and document loads, it prints out questions and answers
 function questions() {
@@ -56,6 +74,7 @@ function questions() {
         var question = snap.val().questions[list[random]].question;
         var answers = snap.val().questions[list[random]].answers;
         correct = snap.val().questions[list[random]].correct;
+        currentKey = randomizedList[random];
         var start ="";
         if(correct.constructor === Array) {
              start = "<input type='checkbox' name='checkAnswer' ";
@@ -107,6 +126,7 @@ function clearDiv() {
     }
 }
 
+//Writes to the questionray div the results from the test.
 function returnResults() {
     const div = document.createElement('div');
     const h1 = document.createElement('h1');
@@ -125,13 +145,53 @@ function returnResults() {
     div.appendChild(pPoints);
     div.appendChild(pAnswered);
     div.appendChild(pPercentage);
-
 }
 
 var counter = 0;
 var points = 0;
 var answeredQuestions = 0;
-var total = 4;
+var total = 6;
+
+//Writes levelData to the database if not already there.
+function writeToDatabase(point, setAmount) {
+    console.log(currentKey);
+    firebase.database().ref("Courses/" + value + "/questions/" + currentKey + "/levelData").set({
+            points: point,
+            amount: setAmount,
+            level: 1
+    });
+}
+
+
+//Updates points, number of times answered and level if already in database, else writes the objects to the database
+function checkIfPoints(setPoint) {
+    dbRefPoints.child(value + "/questions/" + currentKey).once('value', snap => {
+        if (snap.hasChild('levelData')) {
+            var totalAmount = snap.val().levelData.amount;
+            var pointQuestion = snap.val().levelData.points;
+            totalAmount ++;
+            pointQuestion += setPoint;
+            var percentage = round((pointQuestion/totalAmount)*100, 0);
+
+            var lvl;
+            if (percentage <= 40) {
+                lvl = 1;
+            } else if (percentage <= 76 && percentage > 40) {
+                lvl = 2;
+            } else {
+                lvl = 3;
+            }
+            snap.child('levelData').ref.update({
+                amount: totalAmount,
+                points: pointQuestion,
+                level: lvl
+            })
+
+        } else {
+            writeToDatabase(setPoint, 1);
+        }
+    });
+}
 
 //jQuery code that runs questions() on loading of website and on button click.
 $(function(){
@@ -167,15 +227,18 @@ $(function(){
     //Gives user feedback if wrong/right when radiobutton
     $('#buttonAnswer').click(function(){
         var answered = checkAnswerRadio();
+        point = 0;
         if(correct == answered) {
             $('#' + answered).css('color', 'green');
             points += 1;
-
+            point = 1;
         }
         else {
             $('#' + answered).css('color', 'red');
             $('#' + correct).css('color', 'green');
+
         }
+        checkIfPoints(point);
         $('#buttonAnswer').prop('disabled', true);
         $('#buttonNext').removeAttr('disabled');
     });
@@ -204,6 +267,7 @@ $(function(){
             if (tempPoints > 0) {
                 points += round(tempPoints/total, 1);
                 //console.log(round(tempPoints/total, 1))
+                checkIfPoints(round(tempPoints/total, 1));
             }
             $('#buttonAnswer').prop('disabled', true);
             $('#buttonNext').removeAttr('disabled');
