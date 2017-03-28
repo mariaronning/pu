@@ -5,12 +5,16 @@
         <title>prepBot</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
         <link rel="stylesheet" type="text/css" href="questions.css">
+        <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.2.1.css">
         <script src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
     </head>
     <body style="font-family: 'Heebo', sans-serif;">
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <script src="https://code.jquery.com/qunit/qunit-2.2.1.js"></script>
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-default navbar-fixed-top">
@@ -62,9 +66,11 @@
         </div>
 
 
-      <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-      <script src="../app.js?<?php echo time(); ?"></script>
-      <script src="questions.js?<?php echo time(); ?" ></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+        <script src="../app.js?<?php echo time(); ?"></script>
+        <script src="questions.js?<?php echo time(); ?" ></script>
+        <script src="questiontest.js?<?php echo time(); ?"></script>
+
 
     </body>
 
