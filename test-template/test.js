@@ -2,6 +2,7 @@ const dbRefCourses = firebase.database().ref().child('Courses/');
 const btnLogout = document.getElementById('btnLogout');
 const header = document.getElementById('subject');
 const testLinks = document.getElementsByClassName('testLink');
+const dbRefPoints = firebase.database().ref().child('Courses/');
 
 //Gets course ID from the url.
 function getUrlVars() {
@@ -18,12 +19,13 @@ dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
 	header.innerText = snap.val().name;
 });
 
+
+
 function createLinks() {
 	for(var i = 0; i < testLinks.length; i++) {
-		testLinks.item(i).href = "../questionary/questions.html" + "?id=" + value;
+        var levelid = $(testLinks[i]).attr('id');
+		testLinks.item(i).href = "../questionary/questions.html" + "?id=" + value + "&&level=" + levelid;
 	}
-
-
 }
 createLinks();
 
