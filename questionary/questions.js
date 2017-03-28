@@ -35,32 +35,41 @@ courseHeader.innerText = value;
 //Create list of keys, in order to randomize questions
 var list = new Array();
 
-//CHECK IF THERE IS ENOUGH QUESTIONS THAT WE CAN RUN A TOTAL OF 10!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
-    for(var key in snap.val().questions){
-        if(levelid != "random") {
-            dbRefPoints.child(value + "/questions/" + key).once('value', snap => {
-                if (snap.hasChild("levelData")) {
-                    if(snap.val().levelData.level == parseInt(levelid)) {
-                        list.push(key);
+function fireQuestionary() {
+    dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
+        for(var key in snap.val().questions){
+            if(levelid != "random") {
+                dbRefPoints.child(value + "/questions/" + key).once('value', snap => {
+                    if (snap.hasChild("levelData")) {
+                        if(snap.val().levelData.level == parseInt(levelid)) {
+                            list.push(key);
+                        }
+                    } else {
+                        if(parseInt(levelid) == 1) {
+                            list.push(key);
+                        }
                     }
-                } else {
-                    if(parseInt(levelid) == 1) {
-                        list.push(key);
-                    }
-                }
-            });
-        } else {
-            list.push(key);
+                });
+            } else {
+                list.push(key);
+            }
         }
-    }
-    if(list.length > 10) {
-        total = 10;
-    } else {
-        total = list.length;
-    }
-});
+        if(list.length > 10) {
+            total = 10;
+            questions();
+        } else if(list.length == 0) {
+            const h2 = document.createElement('h2');
+            h2.innerText = "There are no questions on this level yet";
+            h2.style.marginLeft = "10%";
+            question.appendChild(h2);
+        } else {
+            total = list.length;
+            questions();
+        }
+    });
+}
+
 
 //Clears Answers list of li elements/answers
 function clearList() {
@@ -76,6 +85,21 @@ var currentKey;
 
 
 //When next is clicked and document loads, it prints out questions and answers
+function checkIfThereAreQuestions() {
+    dbRefCourses.child(value).once('value', snap => {
+        if(snap.hasChild('questions')) {
+            fireQuestionary();
+
+        } else {
+            const h2 = document.createElement('h2');
+            h2.innerText = "This course has no tests";
+            h2.style.marginLeft = "25%";
+            question.appendChild(h2);
+        }
+    });
+
+}
+
 function questions() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         clearList();
@@ -204,7 +228,7 @@ function checkIfPoints(setPoint) {
 //jQuery code that runs questions() on loading of website and on button click.
 $(function(){
     $( document ).ready(function() {
-        questions();
+        checkIfThereAreQuestions();
     });
     $('#buttonNext').click(function(){
         answeredQuestions ++;
