@@ -35,7 +35,7 @@ courseHeader.innerText = value;
 //Create list of keys, in order to randomize questions
 var list = new Array();
 
-
+//Checks wheter there are registered any questions at all and checks wheter there are any questions on a certain level.
 function fireQuestionary() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         for(var key in snap.val().questions){
@@ -56,7 +56,7 @@ function fireQuestionary() {
             }
         }
         if(list.length > 10) {
-            total = 10;
+            total = 2;
             questions();
         } else if(list.length == 0) {
             const h2 = document.createElement('h2');
@@ -80,6 +80,7 @@ function clearList() {
         info.removeChild(info.firstChild);
     }
 }
+
 var correct;
 var currentKey;
 
@@ -100,6 +101,7 @@ function checkIfThereAreQuestions() {
 
 }
 
+//Fetches questions, answers and correct values and writes the first two to the DOM.
 function questions() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         clearList();
@@ -163,23 +165,75 @@ function clearDiv() {
 //Writes to the questionray div the results from the test.
 function returnResults() {
     const div = document.createElement('div');
+    const divDiagram = document.createElement('div');
     const h1 = document.createElement('h1');
     const pPoints = document.createElement('p');
     const pAnswered = document.createElement('p');
     const pPercentage = document.createElement('p');
-    div.className = 'col-md-12';
+    const canvas = document.createElement('canvas');
+
+
+    div.className = 'col-md-5';
+    divDiagram.className = 'col-md-7';
+    canvas.id = 'myChart';
+    canvas.style.maxWidth = '300px';
+    canvas.style.maxHeight = '300px';
+    canvas.style.float = 'right';
+
     h1.innerText = 'Results';
+    h1.style.height = '80px';
+    div.style.paddingLeft = '7%';
     div.style.paddingTop = '3%';
+    divDiagram.style.paddingTop = '5%';
+    divDiagram.style.paddingRight = '8%';
+    pPoints.style.height = '50px';
+    pPoints.style.marginLeft = '6%';
     pPoints.innerText = 'Number of points: ' + points;
+    pAnswered.style.height = '50px';
+    pAnswered.style.marginLeft = '6%';
     pAnswered.innerText = 'Number of questions answered: ' + answeredQuestions;
+    pPercentage.style.height = '50px';
+    pPercentage.style.marginLeft = '6%';
     pPercentage.innerText = 'Percentage of right questions ' + round((points/answeredQuestions)*100, 0) + '%';
 
+
     questionary.appendChild(div);
+    questionary.appendChild(divDiagram);
     div.appendChild(h1);
     div.appendChild(pPoints);
     div.appendChild(pAnswered);
     div.appendChild(pPercentage);
+    divDiagram.appendChild(canvas);
+
+    var myChart = new Chart(canvas, {
+        type: 'pie',
+        data: {
+            labels: [
+                "Right",
+                "Wrong",
+            ],
+            datasets: [{
+                data: [points, answeredQuestions-points],
+                backgroundColor: [
+                    "#00cc00",
+                    "#cc0000"
+                ],
+                hoverBackgroundColor: [
+                    "#00b300",
+                    "#b30000"
+                ]
+            }]
+        },
+        options: {
+            animation:{
+                animateScale:true
+            }
+        }
+    });
 }
+
+
+
 
 var counter = 0;
 var points = 0;
