@@ -1,4 +1,5 @@
 const dbRefCourses = firebase.database().ref().child('Courses/');
+const dbRefUsers = firebase.database().ref().child('Users/');
 const btnLogout = document.getElementById('btnLogout');
 const courseHeader = document.getElementById('courseId');
 const answerList = document.getElementById('answerList');
@@ -289,6 +290,33 @@ function checkIfPoints(setPoint) {
     });
 }
 
+function createUserResult() {
+    dbRefUsers.child(user + "/results").set({
+            points: points,
+            amount: answeredQuestions
+    });
+}
+
+
+
+function writeResultsToUser() {
+    dbRefUsers.child(user).once('value', snap => {
+        if (snap.hasChild('results')) {
+            var totalAmount = snap.val().results.amount;
+            var pointQuestion = snap.val().results.points;
+            totalAmount += answeredQuestions;
+            pointQuestion += points;
+            snap.child('results').ref.update({
+                amount: totalAmount,
+                points: pointQuestion
+            })
+
+        } else {
+            createUserResult(user);
+        }
+    });
+}
+
 //jQuery code that runs questions() on loading of website and on button click.
 $(function(){
     $( document ).ready(function() {
@@ -303,6 +331,7 @@ $(function(){
         if(counter == total) {
             clearDiv();
             returnResults();
+            writeResultsToUser();
         }
 
         $('#buttonNext').prop('disabled', true);
@@ -377,8 +406,10 @@ function round(value, precision) {
     return Math.round(value * multiplier) / multiplier;
 }
 
+var user;
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
+      user = firebaseUser.uid;
       userId.innerText = firebaseUser.email;
   }
 

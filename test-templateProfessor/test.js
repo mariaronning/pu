@@ -5,7 +5,6 @@ const level1 = document.getElementById('Availabletest');
 const level2 = document.getElementById('Myresults');
 const level3 = document.getElementById('Courseresults');
 const testLinks = document.getElementsByClassName('testLink');
-const dbRefPoints = firebase.database().ref().child('Courses/');
 const userId = document.getElementById('userID');
 
 //Gets course ID from the url.
@@ -33,8 +32,7 @@ var answersLevel3 = 0;
 
 
 function getResults() {
-
-    dbRefPoints.child(value + "/questions/").once('value', snap => {
+    dbRefCourses.child(value + "/questions/").once('value', snap => {
         for(var key in snap.val()) {
             if (snap.child(key).hasChild("levelData")) {
                 if(snap.val()[key].levelData.level == 1) {
@@ -49,9 +47,9 @@ function getResults() {
                 }
             }
         }
-        createGraphs(level1, pointsLevel1, answersLevel1);
-        createGraphs(level2, pointsLevel2, answersLevel2);
-        createGraphs(level3, pointsLevel3, answersLevel3);
+        createGraphs(level1, pointsLevel1, answersLevel1 - pointsLevel1);
+        createGraphs(level2, pointsLevel2, answersLevel2 - pointsLevel2);
+        createGraphs(level3, pointsLevel3, answersLevel3 - pointsLevel3);
     });
 }
 getResults();

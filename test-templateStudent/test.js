@@ -1,8 +1,10 @@
 const dbRefCourses = firebase.database().ref().child('Courses/');
+const dbRefUsers = firebase.database().ref().child('Users/');
 const btnLogout = document.getElementById('btnLogout');
 const header = document.getElementById('subject');
+const myResults = document.getElementById('Myresults');
+const courseResults = document.getElementById('Courseresults');
 const testLinks = document.getElementsByClassName('testLink');
-const dbRefPoints = firebase.database().ref().child('Courses/');
 const userId = document.getElementById('userID');
 
 //Gets course ID from the url.
@@ -20,7 +22,68 @@ dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
 	header.innerText = snap.val().name;
 });
 
+function getAllResults() {
+    var points = 0;
+    var amount = 0;
+    dbRefCourses.child(value + "/questions/").once('value', snap => {
+        for(var key in snap.val()) {
+            if (snap.child(key).hasChild("levelData")) {
+                points += snap.val()[key].levelData.points;
+                amount += snap.val()[key].levelData.amount;
+            }
+        }
+        createGraphs(courseResults, points, amount - points);
+    });
+}
 
+function getMyResults() {
+    console.log(user);
+    dbRefUsers.child(user).once('value', snap => {
+        var points = 0;
+        var amount = 0;
+        if(snap.hasChild('results')) {
+
+            points += snap.val().results.points;
+            amount += snap.val().results.amount;
+            //console.log(amount);
+        }
+        createGraphs(myResults, points, (amount - points));
+    });
+}
+
+function createGraphs(div, right, wrong) {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'myChart';
+    canvas.style.maxWidth = '250px';
+    canvas.style.maxHeight = '250px';
+    canvas.style.marginLeft = '7%';
+    div.appendChild(canvas);
+    var myChart = new Chart(canvas, {
+        type: 'pie',
+        data: {
+            labels: [
+                "Right",
+                "Wrong",
+            ],
+            datasets: [{
+                data: [right, wrong],
+                backgroundColor: [
+                    "#577a4f",
+                    "#964c4c"
+                ],
+                hoverBackgroundColor: [
+                    "#4d7744",
+                    "#933e3e"
+                ]
+            }]
+        },
+        options: {
+            animation:{
+                animateScale:true
+            }
+        }
+    });
+}
 
 function createLinks() {
 	for(var i = 0; i < testLinks.length; i++) {
@@ -37,9 +100,15 @@ btnLogout.addEventListener('click', e => {
 
 });
 
+
+var user;
+
 //Writes email adress to nav-bar
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
+      user = firebaseUser.uid;
+      getAllResults();
+      getMyResults();
       userId.innerText = firebaseUser.email;
   }
 
