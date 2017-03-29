@@ -37,15 +37,15 @@ function getAllResults() {
 }
 
 function getMyResults() {
-    console.log(user);
     dbRefUsers.child(user).once('value', snap => {
         var points = 0;
         var amount = 0;
         if(snap.hasChild('results')) {
+            if(snap.child('results').hasChild(value)) {
+                points += snap.child('results').child(value).val().points;
+                amount += snap.child('results').child(value).val().amount;
+            }
 
-            points += snap.val().results.points;
-            amount += snap.val().results.amount;
-            //console.log(amount);
         }
         createGraphs(myResults, points, (amount - points));
     });
