@@ -6,6 +6,7 @@ const questionP = document.getElementById('question');
 const questionary = document.getElementById('questionary');
 const info = document.getElementById('info');
 const dbRefPoints = firebase.database().ref().child('Courses/');
+const userId = document.getElementById('userID');
 
 var total;
 
@@ -39,6 +40,7 @@ var list = new Array();
 function fireQuestionary() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         for(var key in snap.val().questions){
+
             if(levelid != "random") {
                 dbRefPoints.child(value + "/questions/" + key).once('value', snap => {
                     if (snap.hasChild("levelData")) {
@@ -56,7 +58,7 @@ function fireQuestionary() {
             }
         }
         if(list.length > 10) {
-            total = 2;
+            total = 10;
             questions();
         } else if(list.length == 0) {
             const h2 = document.createElement('h2');
@@ -215,12 +217,12 @@ function returnResults() {
             datasets: [{
                 data: [points, answeredQuestions-points],
                 backgroundColor: [
-                    "#00cc00",
-                    "#cc0000"
+                    "#577a4f",
+                    "#964c4c"
                 ],
                 hoverBackgroundColor: [
-                    "#00b300",
-                    "#b30000"
+                    "#4d7744",
+                    "#933e3e"
                 ]
             }]
         },
@@ -240,11 +242,11 @@ var points = 0;
 var answeredQuestions = 0;
 
 //Writes levelData to the database if not already there.
-function writeToDatabase(point, setAmount) {
+function writeToDatabase(point, setAmount, lvl) {
     firebase.database().ref("Courses/" + value + "/questions/" + currentKey + "/levelData").set({
             points: point,
             amount: setAmount,
-            level: 1
+            level: lvl
     });
 }
 
@@ -258,14 +260,13 @@ function checkIfPoints(setPoint) {
             totalAmount ++;
             pointQuestion += setPoint;
             var percentage = round((pointQuestion/totalAmount)*100, 0);
-
             var lvl;
             if (percentage <= 40) {
-                lvl = 1;
+                lvl = 3;
             } else if (percentage <= 76 && percentage > 40) {
                 lvl = 2;
             } else {
-                lvl = 3;
+                lvl = 1;
             }
             snap.child('levelData').ref.update({
                 amount: totalAmount,
@@ -274,7 +275,16 @@ function checkIfPoints(setPoint) {
             })
 
         } else {
-            writeToDatabase(setPoint, 1);
+            var percentage = round((setPoint/1)*100, 0);
+            var lvl;
+            if (percentage <= 40) {
+                lvl = 3;
+            } else if (percentage <= 76 && percentage > 40) {
+                lvl = 2;
+            } else {
+                lvl = 1;
+            }
+            writeToDatabase(setPoint, 1, lvl);
         }
     });
 }
@@ -350,7 +360,7 @@ $(function(){
                     tempPoints -= 0.5;
                 }
             }
-            if (tempPoints > 0) {
+            if (tempPoints >= 0) {
                 points += round(tempPoints/total, 1);
                 //console.log(round(tempPoints/total, 1))
                 checkIfPoints(round(tempPoints/total, 1));
@@ -366,3 +376,10 @@ function round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;
 }
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+  if (firebaseUser) {
+      userId.innerText = firebaseUser.email;
+  }
+
+});

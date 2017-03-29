@@ -3,6 +3,7 @@ const btnLogout = document.getElementById('btnLogout');
 const header = document.getElementById('subject');
 const testLinks = document.getElementsByClassName('testLink');
 const dbRefPoints = firebase.database().ref().child('Courses/');
+const userId = document.getElementById('userID');
 
 //Gets course ID from the url.
 function getUrlVars() {
@@ -33,5 +34,13 @@ createLinks();
 btnLogout.addEventListener('click', e => {
     firebase.auth().signOut();
     document.location.href = '../index.html?<?php echo time(); ?';
+
+});
+
+//Writes email adress to nav-bar
+firebase.auth().onAuthStateChanged(firebaseUser => {
+  if (firebaseUser) {
+      userId.innerText = firebaseUser.email;
+  }
 
 });
