@@ -59,7 +59,7 @@ function fireQuestionary() {
             }
         }
         if(list.length > 10) {
-            total = 10;
+            total = 2;
             questions();
         } else if(list.length == 0) {
             const h2 = document.createElement('h2');
@@ -290,8 +290,9 @@ function checkIfPoints(setPoint) {
     });
 }
 
+//Creates user result if not already present
 function createUserResult() {
-    dbRefUsers.child(user + "/results").set({
+    dbRefUsers.child(user + "/results/" + value).set({
             points: points,
             amount: answeredQuestions
     });
@@ -302,14 +303,19 @@ function createUserResult() {
 function writeResultsToUser() {
     dbRefUsers.child(user).once('value', snap => {
         if (snap.hasChild('results')) {
-            var totalAmount = snap.val().results.amount;
-            var pointQuestion = snap.val().results.points;
-            totalAmount += answeredQuestions;
-            pointQuestion += points;
-            snap.child('results').ref.update({
-                amount: totalAmount,
-                points: pointQuestion
-            })
+            if(snap.child('results').hasChild(value)) {
+                var totalAmount = snap.child('results').child(value).val().amount;
+                var pointQuestion = snap.child('results').child(value).val().points;;
+                totalAmount += answeredQuestions;
+                pointQuestion += points;
+                snap.child('results').child(value).ref.update({
+                    amount: totalAmount,
+                    points: pointQuestion
+                });
+            }
+            else {
+                createUserResult(user);
+            }
 
         } else {
             createUserResult(user);
