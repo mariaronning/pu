@@ -59,7 +59,7 @@ function createList(snap) {
     aButton.className = "plusButton btn btn-default";
     li.style.float = "left";
     aButton.style.float = "right";
-    a.href = "/test-template/test.html"+ "?id=" + snap.key;
+    a.href = "/test-templateStudent/test.html"+ "?id=" + snap.key;
 
     searchResults.appendChild(div);
     div.appendChild(li);
@@ -104,8 +104,9 @@ function createListMyCourses(courseId) {
     const a = document.createElement('a');
     const span = document.createElement('span');
 
-    span.className = "glyphicon glyphicon-ok";
+    span.className = "glyphicon glyphicon-ok removeCourse";
     span.style.volor="green";
+    span.id = courseId;
     li.id = courseId;
     a.innerText = " " + courseId;
     a.style.textDecoration = "none";
@@ -113,7 +114,7 @@ function createListMyCourses(courseId) {
     li.style.textDecoration = "none";
     div.className = "col-md-12";
     div.style.paddingLeft = "12%";
-    a.href = "/test-template/test.html"+ "?id=" + courseId;
+    a.href = "/test-templateStudent/test.html"+ "?id=" + courseId;
     li.style.float = "left";
 
 
@@ -123,6 +124,28 @@ function createListMyCourses(courseId) {
     li.appendChild(span);
     li.appendChild(a);
 }
+
+/*$(function(){
+    $( document ).ready(function() {
+        $(document).on('click', '.removeCourse', function (event) {
+
+            var courseSpan = event.currentTarget.attributes[0].nodeValue;
+            dbRefUsers.child(user).child('courses').once('value', snap => {
+                for(var key in snap.val()) {
+                    if (snap.val()[key].course == courseSpan) {
+                        console.log(snap.val()[key].child(courseSpan));
+                        break;
+                    } else {
+
+                    }
+
+                }
+
+            });
+        });
+    });
+});*/
+
 
 //Gets all courses added by the current user and fires a fucntion that writes the courses to html
 function getmyCoursesDatabase(user) {

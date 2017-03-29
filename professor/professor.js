@@ -59,7 +59,7 @@ function createList(snap) {
     aButton.className = "plusButton btn btn-default";
     li.style.float = "left";
     aButton.style.float = "right";
-    a.href = "/test-template/test.html"+ "?id=" + snap.key;
+    a.href = "/test-templateProfessor/test.html"+ "?id=" + snap.key;
 
     searchResults.appendChild(div);
     div.appendChild(li);
@@ -113,7 +113,7 @@ function createListMyCourses(courseId) {
     li.style.textDecoration = "none";
     div.className = "col-md-12";
     div.style.paddingLeft = "12%";
-    a.href = "/test-template/test.html"+ "?id=" + courseId;
+    a.href = "/test-templateProfessor/test.html"+ "?id=" + courseId;
     li.style.float = "left";
 
 

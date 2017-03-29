@@ -38,7 +38,7 @@
     margin-left: -35px;
 }
 
-label {
+#loginLabel {
     color: lightgrey;
     opacity: 1;
     font-family: 'Heebo', sans-serif;
@@ -186,6 +186,59 @@ a:hover {
 
 
 /*START QUESTIONARY.HTML */
+#subjectHeader {
+    width:600px;
+    height: 90px;
+    text-align: center;
+    margin-top: 8px;
+    color: #454747;
+}
+#questionary {
+    width:800px;
+    min-height: 400px;
+    background-color: rgba(33, 207 , 208, 0.1);
+    box-shadow: 0 0 40px #888888;
+}
+#next {
+    height: 40px;
+}
+
+#buttonNext {
+    float: right;
+}
+#buttonAnswer {
+    float: right;
+}
+
+#question {
+    min-height: 60px;
+    padding-top: 2%;
+    margin-top: 3%;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#answer {
+    min-height: 220px;
+}
+
+#answerList {
+    list-style-type: none;
+    padding-top: 3%;
+
+}
+
+#answerList li {
+    min-height:50px;
+    font-size: 15px;
+
+}
+
+#info {
+    font-style: italic;
+    margin-left: 35%;
+    margin-bottom: 3%;
+}
 
 /*END QUESTIONARY.HTML*/
 

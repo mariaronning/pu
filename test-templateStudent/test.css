@@ -1,0 +1,108 @@
+
+#course{
+	/*font-family: monospace, "Courier New", serif;*/
+	font-size: 40px;
+	text-align: center;
+}
+
+#availableHeader {
+	font-size: 30px;
+	text-align: center;
+}
+
+
+#Availabletest{
+	/*font-family: monospace, "Courier New", serif;*/
+	margin-top: 50px;
+	border: 1px solid gray;
+	height: 400px;
+	padding-top: 20px;
+	margin-left: 170px;
+	margin-right: 20px;
+	box-shadow: 0 0 40px #888888;
+	border-radius: 5px;
+}
+
+.testLink {
+	color:black !important;
+	text-decoration: none;
+}
+.testLink:hover{
+	color:black;
+	font-weight: bold;
+	text-decoration: none;
+}
+#myresultsHeader {
+	font-size: 30px;
+	text-align: center;
+}
+
+#Myresults{
+	/*font-family: monospace, "Courier New", serif;*/
+	margin-top: 50px;
+	border: 1px solid gray;
+	height: 400px;
+	padding-top: 20px;
+	background-color: white;
+	box-shadow: 0 0 40px #888888;
+	border-radius: 5px;
+}
+#Myresults:hover{
+	font-size: 30px;
+	border-color:white;
+
+    box-shadow: 0 0 60px #888888;
+	padding-top: 20px;
+	background-color:white ;
+
+	border-radius: 10px;
+
+}
+#Courseresults:hover{
+	font-size: 30px;
+	border-color:white;
+    box-shadow: 0 0 60px #888888;
+	padding-top: 20px;
+	background-color:white ;
+	border-radius: 10px;
+	border-radius: 10px;
+}
+#Availabletest:hover{
+	border-color:white;
+    box-shadow: 0 0 60px #888888;
+	padding-top: 20px;
+	border-radius: 10px;
+	border-radius: 10px;
+
+}
+#courseResultsHeader {
+	font-size: 30px;
+	text-align: center;
+}
+#Courseresults{
+	/*font-family: monospace, "Courier New", serif;*/
+	margin-top: 50px;
+	border: 1px solid gray;
+	height: 400px;
+	padding-top: 20px;
+	margin-left: 20px;
+	background-color: white;
+	box-shadow: 0 0 40px #888888;
+	border-radius: 5px;
+}
+
+
+subjectpage{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+	background-color: white;
+	opacity: 0.5;
+  	top: 0;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
+  	position: absolute;
+  	z-index: -1;
+}
