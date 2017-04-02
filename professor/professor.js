@@ -59,6 +59,10 @@ function createList(snap) {
     aButton.className = "plusButton btn btn-default";
     li.style.float = "left";
     aButton.style.float = "right";
+    aButton.style.background = "transparent";
+    aButton.style.border = "none";
+    aButton.style.outline = "none";
+    aButton.style.cursor = "pointer";
     a.href = "/test-templateProfessor/test.html"+ "?id=" + snap.key;
 
     searchResults.appendChild(div);
@@ -103,9 +107,11 @@ function createListMyCourses(courseId) {
     const div = document.createElement('div');
     const a = document.createElement('a');
     const span = document.createElement('span');
+    const button = document.createElement('button');
+
 
     span.className = "glyphicon glyphicon-ok";
-    span.style.volor="green";
+    span.style.color="green";
     li.id = courseId;
     a.innerText = " " + courseId;
     a.style.textDecoration = "none";
@@ -115,19 +121,51 @@ function createListMyCourses(courseId) {
     div.style.paddingLeft = "12%";
     a.href = "/test-templateProfessor/test.html"+ "?id=" + courseId;
     li.style.float = "left";
-
+    button.id = courseId;
+    button.className = "removeCourse";
+    button.style.background = "transparent";
+    button.style.border = "none";
+    button.style.outline = "none";
+    button.style.cursor = "pointer";
 
 
     myCoursesOutput.appendChild(div);
     div.appendChild(li);
-    li.appendChild(span);
+    li.appendChild(button);
+    button.appendChild(span);
     li.appendChild(a);
+}
+//Updates the html when a course is removed
+function removeLi(key, id) {
+    dbRefUsers.child(user + '/courses/' + key).on('child_removed', snap => {
+        const li = document.getElementById(id);
+        li.remove();
+    });
+}
+
+//Removes course when clicked on button from the database.
+function removeCourseId() {
+    $(".removeCourse").unbind().click(function(event) {
+        course = event.currentTarget.attributes[0].nodeValue;
+    	dbRefUsers.child(user).child('courses').once('value', snap => {
+            for(var key in snap.val()) {
+                if (snap.val()[key].course == course) {
+                    snap.child(key).ref.update({
+                        course: null
+                    });
+                    removeLi(key, course);
+                    break;
+                }
+            }
+        });
+    });
 }
 
 //Gets all courses added by the current user and fires a fucntion that writes the courses to html
 function getmyCoursesDatabase(user) {
     firebase.database().ref("Users/" + user + "/courses").limitToFirst(10).on('child_added', snap => {
         createListMyCourses(snap.val().course);
+        removeCourseId();
     });
 };
 
@@ -144,10 +182,8 @@ function getID() {
     $(".plusButton").unbind().click(function(event) {
     	var check = false;
         course = event.currentTarget.attributes[0].nodeValue;
-        console.log(course);
     	dbRefUsers.child(user).child('courses').once('value', snap => {
             for(var key in snap.val()) {
-                console.log(snap.val()[key].course)
                 if (snap.val()[key].course == course) {
                     check = true;
                     break;
