@@ -198,6 +198,7 @@ a:hover {
     min-height: 400px;
     background-color: rgba(33, 207 , 208, 0.1);
     box-shadow: 0 0 40px #888888;
+    border-radius: 10px;
 }
 #next {
     height: 40px;
