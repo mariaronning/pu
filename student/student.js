@@ -208,7 +208,7 @@ function getID() {
 btnLogout.addEventListener('click', e => {
 
   firebase.auth().signOut();
-  document.location.href = '../index.html?<?php echo time(); ?';
+  document.location.href = '../index.html';
 
 });
 
