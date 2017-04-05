@@ -38,11 +38,11 @@
     if(firebaseUser) {
       btnLogout.classList.remove('hide');
       if(firebaseUser.uid == "qSU0UXnTSQhzHBDcXhaKDCV6Eaq1") {
-        window.location.href = "/professor/professor.html?<?php echo time(); ?";
+        window.location.href = "/professor/professor.html";
       } else if (firebaseUser.uid == "HY642spfnmUaevElYM1sPAtHlbw2"){
-        window.location.href = "/professor/professor.html?<?php echo time(); ?";
+        window.location.href = "/professor/professor.html";
       } else {
-        window.location.href = "/student/student.html?<?php echo time(); ?";
+        window.location.href = "/student/student.html";
       }
 
     } else {
