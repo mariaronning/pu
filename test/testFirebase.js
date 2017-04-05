@@ -1,7 +1,4 @@
 
-
-var $ = require('../bower_components/jquery/dist/jquery.min.js');
-var assert = require('assert');
 var student = require('../student/student.js');
 var studentDOM = require('../student/student.html');
 var firebase = require('firebase');
@@ -16,11 +13,14 @@ var config = {
 firebase.initializeApp(config);
 
 
+require('babel-register')();
+var $ = require('../bower_components/jquery/dist/jquery.min.js');
 
 
+var assert = require('assert');
 describe('Array', function() {
     it('should return -1 when the value is not present', function() {
-        console.log(stundet.checkAnswerCheckbox().length);
+
 
     });
 });
