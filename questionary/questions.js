@@ -59,7 +59,7 @@ function fireQuestionary() {
             }
         }
         if(list.length > 10) {
-            total = 2;
+            total = 10;
             questions();
         } else if(list.length == 0) {
             const h2 = document.createElement('h2');
