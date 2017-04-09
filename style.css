@@ -4,7 +4,9 @@
 
 #frontPage{
     font-family: 'Heebo', sans-serif;
-    background-image: url("/images/mh.jpg");
+    background-image: url("/images/mg1.jpg");
+    -webkit-transition: 3s linear;
+    transition: 3s linear 1s;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;

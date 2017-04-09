@@ -7,6 +7,19 @@
   const btnSignUp = document.getElementById("btnSignUp");
   const btnLogout = document.getElementById("btnLogout");
   var newUser = false;
+  var counter = 1;
+  function changeImage() {
+    $(document).ready(function() {
+        console.log(counter);
+        $('#frontPage').css('background-image', 'url(images/mg' + counter + '.jpg)');
+    });
+    if(counter == 6) {
+        counter = 1;
+    } else {
+        counter ++;
+    }
+  }
+  setInterval(function() {changeImage()}, 12000);
   //Add login event
   btnLogin.addEventListener('click', e => {
     const email = txtEmail.value;
