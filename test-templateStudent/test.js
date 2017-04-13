@@ -54,6 +54,7 @@ function getMyResults() {
 function createGraphs(div, right, wrong, id) {
     const canvas = document.createElement('canvas');
     canvas.id = id;
+    canvas.title = right + '/' + (right + wrong);
     canvas.style.maxWidth = '250px';
     canvas.style.maxHeight = '250px';
     canvas.style.marginLeft = '7%';

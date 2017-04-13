@@ -401,7 +401,7 @@ $(function(){
                 checkIfPoints(round(tempPoints/total, 1));
             }
             $('#buttonAnswer').prop('disabled', true);
-            $('#buttonNext').removeAttr('disabled');
+            $('#buttonNext').removeAttr('disabled'); 
         }
 
     });

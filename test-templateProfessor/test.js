@@ -47,21 +47,22 @@ function getResults() {
                 }
             }
         }
-        createGraphs(level1, pointsLevel1, answersLevel1 - pointsLevel1);
-        createGraphs(level2, pointsLevel2, answersLevel2 - pointsLevel2);
-        createGraphs(level3, pointsLevel3, answersLevel3 - pointsLevel3);
+        createGraphs(level1, pointsLevel1, answersLevel1 - pointsLevel1, level1);
+        createGraphs(level2, pointsLevel2, answersLevel2 - pointsLevel2, level2);
+        createGraphs(level3, pointsLevel3, answersLevel3 - pointsLevel3, level3);
     });
 }
 getResults();
 
-function createGraphs(div, right, wrong) {
+function createGraphs(div, right, wrong, id) {
     const canvas = document.createElement('canvas');
-    canvas.id = 'myChart';
+    canvas.id = id;
+    canvas.title = right + '/' + (right + wrong);
     canvas.style.maxWidth = '250px';
     canvas.style.maxHeight = '250px';
     canvas.style.marginLeft = '10%';
     div.appendChild(canvas);
-    var myChart = new Chart(canvas, {
+    var id = new Chart(canvas, {
         type: 'pie',
         data: {
             labels: [
