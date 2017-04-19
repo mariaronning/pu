@@ -19,7 +19,7 @@
     "webdriverio": "^4.6.2"
   },
   "scripts": {
-    "test": "chimp --mocha --watch"
+    "test": "chimp --mocha"
   },
   "author": "",
   "license": "ISC"
