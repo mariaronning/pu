@@ -2,6 +2,8 @@ var Addbutton = document.getElementById("Add"); //getting the add button from th
 var counter=1; //counter variable to get the right id on the questions being made. 
 var sporsmol = document.getElementById("sporsmol");//getting the div i want the new questins and answers to lay in. 
 var submitbutton = document.getElementById("submit"); 
+var deletesporsmol = document.getElementById("Delete");
+
 
 Addbutton.addEventListener("click", function renderquestion(){
 	
@@ -27,9 +29,9 @@ Addbutton.addEventListener("click", function renderquestion(){
 	div2.id ="answer" + counter; 
 	var answer= document.createElement("LABEL");
 	answer.name= "answer"; 
-	answer.innerText = "Answer"; 
+	answer.innerText = "Answers"; 
 	var answertext = document.createElement("textarea");
-	answertext.placeholder = "Write your answer"; 
+	answertext.placeholder = "Write your anwers on the form:  <answer1> <answer2> etc..."; 
 	answertext.type="text";
 	answertext.className="form-control answers";
 	answertext.rows = "12"; 
@@ -41,12 +43,12 @@ Addbutton.addEventListener("click", function renderquestion(){
 	var space2=document.createElement("br");
 	var div3= document.createElement("div"); 
 	div3.className ="form group col-md-13";
-	div3.id = "answer" + counter; 
+	div3.id = "correctanswer" + counter; 
 	var correctans= document.createElement("LABEL"); 
 	correctans.name="correctanswer"; 
-	correctans.innerText="Correct Answer";
+	correctans.innerText="Correct answer(s)";
 	var correcttext = document.createElement("input");
-	correcttext.placeholder="Write the correct answer, a number between 1-4, divided be comma if several is correct";
+	correcttext.placeholder="Write the correct answer(s). If answers answers1 and answer3 are correct, write: 1, 3 ";
 	correcttext.type="text"; 
 	correcttext.className="form-control correctanswers";
     var ctext = document.createElement("text");
@@ -74,12 +76,26 @@ Addbutton.addEventListener("click", function renderquestion(){
     div3.appendChild(ctext);
 });
 
+deletesporsmol.addEventListener("click", function deletequestion(){
+
+    counter--;
+    var div3 = document.getElementById("correctanswer" + counter);
+    div3.parentNode.removeChild(div3);
+    var div2 = document.getElementById("answer" + counter);
+    div2.parentNode.removeChild(div2);
+    var div1 = document.getElementById("question" + counter);
+    div1.parentNode.removeChild(div1);
+
+});
+
+
+
 submitbutton.addEventListener("click",function savetest(){
 
     //Get user input 
     var title = document.getElementsByClassName("form-control title")[0].value;
     var course = document.getElementsByClassName("form-control course")[0].value;
-    var questions = document.getElementsByClassName("form-control questions")
+    var questions = document.getElementsByClassName("form-control questions");
     var answers = document.getElementsByClassName("form-control answers");
     var correctAnswers = document.getElementsByClassName("form-control correctanswers");
     
@@ -100,7 +116,6 @@ submitbutton.addEventListener("click",function savetest(){
     var foundErrors = checkValidAnswersandCorrectAnswers(answers, correctAnswers);
     var validAandCA = true;;
     for(i = 0; i < foundErrors.length; i++){
-        console.log(foundErrors[i]);
         if(foundErrors[i] != 0){
             validAandCA = false;
             break;
@@ -123,10 +138,6 @@ submitbutton.addEventListener("click",function savetest(){
 
 
     //Gives error message if the input is not valid, if it is add the test to the database 
-    console.log(foundErrors);
-    console.log(gvTitle);
-    console.log(gvQuestions);
-    console.log(validAandCA);
     if(!(gvTitle && !gvQuestions && validAandCA)){ 
         
         if(!(gvTitle)){
@@ -141,8 +152,6 @@ submitbutton.addEventListener("click",function savetest(){
         if(!validAandCA){ 
             for(i = 0; i < foundErrors.length; i++){
                 var thisquestion = Math.floor(i/7);
-                console.log("i: " + i);
-                console.log(thisquestion);
                 switch(foundErrors[i]){
                     case 1:
                     document.getElementById("atext" + thisquestion).innerHTML   = "An empty answer field is not valid. "
@@ -220,11 +229,6 @@ submitbutton.addEventListener("click",function savetest(){
         var answersSplit = getValidAnswers(answers);
         var correctAnswersSplit = getValidCorrectAnswers(correctAnswers);
 
-        console.log("ADD TO DATEBASE");
-        console.log(title)
-        console.log(QuestionsSplit);
-        console.log(answersSplit);
-        console.log(correctAnswersSplit);
         //TODO: add to database, OBS: remeber to add as int if only on correct answer 
 
 
@@ -291,7 +295,7 @@ function checkValidAnswersandCorrectAnswers(answers, correctAnswers){
         else{
             foundErrors.push(0);
         }
-        if(!(/^[0-4, \s]+$/.test(correctAnswers[i].value)) || !((correctAnswers[i].value.match(/1/g)) == null || correctAnswers[i].value.match(/1/g).length == 1) || !((correctAnswers[i].value.match(/2/g)) == null || correctAnswers[i].value.match(/2/g).length == 1) ||!((correctAnswers[i].value.match(/3/g)) == null || correctAnswers[i].value.match(/3/g).length == 1) || !((correctAnswers[i].value.match(/4/g)) == null || correctAnswers[i].value.match(/4/g).length == 1)){ 
+        if(!(/^[1-4, \s]+$/.test(correctAnswers[i].value)) || !((correctAnswers[i].value.match(/1/g)) == null || correctAnswers[i].value.match(/1/g).length == 1) || !((correctAnswers[i].value.match(/2/g)) == null || correctAnswers[i].value.match(/2/g).length == 1) ||!((correctAnswers[i].value.match(/3/g)) == null || correctAnswers[i].value.match(/3/g).length == 1) || !((correctAnswers[i].value.match(/4/g)) == null || correctAnswers[i].value.match(/4/g).length == 1)){ 
             foundErrors.push(3);
         }
         else{
@@ -325,8 +329,6 @@ function checkValidAnswersandCorrectAnswers(answers, correctAnswers){
     }
     return foundErrors;
 }
-
-
 
 //Splits up answer input into each answer, and adds them to an array. 
 function getValidAnswers(answers){   
