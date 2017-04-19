@@ -51,10 +51,12 @@
 						<div class="form-group">
 							<label for="title">Title</label>
 							<input type="text" class="form-control title" id="testTitle" placeholder="Test name">
+							<span id="titleError"></span>
 						</div>
 						<div class="form-group">
 							<label for="Course">Course</label>
 							<input type="text" class="form-control course" id="Coursename" placeholder="Course name">
+							<span id="courseError"></span>
 						</div>
                         <div class="col-md-12 list-group" id="searchEngine">
                             <ul id="searchResults1" class="list-group">
@@ -63,24 +65,24 @@
                         </div>
 						<div id="info">
 							<p id=Questionsheader> Questions </p>
-							<p id="infotext">"Write your answers in the middel of "" signs maximum amount of alternatives is 4. Separate them with comma. </p>
+							<p id="infotext">"Write your answers in the middel of < > signs, with a minimum of 2 alternatives and a maximum of 4. Write which answer is correct in correct answer using the number(s) that corresponds with the right answer, and comma to spearate them if there are mulitple. </p>
 						</div>
 						<div id="sporsmol">
-						<div class= "form group">
-							<label for= "Question"> Question</label>
+						<div class= "form group" id = "question0">
+							<label for= "Question"> Question 1</label>
 							<input type="text" class="form-control questions" placeholder="Write your Question">
+							<text id = "stext0"> &emsp; </text>
 						</div>
 						<div class= "form group">
-							<br>
 							<label for= "Question"> Answers</label>
-							<textarea class="form-control answers" placeholder= "Write your answers" rows= "12"></textarea>
-
+							<textarea class="form-control answers" placeholder= "Write your anwers on the form:  <answer1> <answer2> etc..." rows= "12"></textarea>
+							<text id = "atext0"> &emsp; </text>
 						</div>
-							<br>
-							<label for= "Answer"> Correct Answer </label>
-							<input type="text" class="form-control correctanswers" placeholder="Write the correct answer, a number between 1-4, divided be comma if several is correct">
-						<div>
-
+							<label for= "Answer"> Correct answer(s) </label>
+							<input type="text" class="form-control correctanswers" placeholder="Write the correct answer(s). If answers answers1 and answer3 are correct, write: 1, 3 ">
+							<span id="ctext0"> &emsp; </span> 
+						<div> 
+							
 							</div>
 						 </div>
 
@@ -88,6 +90,7 @@
 							<div class ="col-md-3">
 							<br>
 							<button class="btn btn-default" type= "button" id= "Add">Add new Question</button>
+							<button class="btn btn-default" type = "button" id = "Delete"> Delete Question </button>
 							</div>
 							<div class= "col-md-9">
 							<br>

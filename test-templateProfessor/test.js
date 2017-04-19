@@ -47,9 +47,9 @@ function getResults() {
                 }
             }
         }
-        createGraphs(level1, pointsLevel1, answersLevel1 - pointsLevel1, level1);
-        createGraphs(level2, pointsLevel2, answersLevel2 - pointsLevel2, level2);
-        createGraphs(level3, pointsLevel3, answersLevel3 - pointsLevel3, level3);
+        createGraphs(level1, pointsLevel1, answersLevel1 - pointsLevel1, 'level1');
+        createGraphs(level2, pointsLevel2, answersLevel2 - pointsLevel2, 'level2');
+        createGraphs(level3, pointsLevel3, answersLevel3 - pointsLevel3, 'level3');
     });
 }
 getResults();
