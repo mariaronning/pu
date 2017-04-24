@@ -32,7 +32,7 @@ function getAllResults() {
                 amount += snap.val()[key].levelData.amount;
             }
         }
-        createGraphs(courseResults, points, amount - points);
+        createGraphs(courseResults, points, amount - points, 'allResults');
     });
 }
 
@@ -47,18 +47,19 @@ function getMyResults() {
             }
 
         }
-        createGraphs(myResults, points, (amount - points));
+        createGraphs(myResults, points, (amount - points), 'results');
     });
 }
 
-function createGraphs(div, right, wrong) {
+function createGraphs(div, right, wrong, id) {
     const canvas = document.createElement('canvas');
-    canvas.id = 'myChart';
+    canvas.id = id;
+    canvas.title = right + '/' + (right + wrong);
     canvas.style.maxWidth = '250px';
     canvas.style.maxHeight = '250px';
     canvas.style.marginLeft = '7%';
     div.appendChild(canvas);
-    var myChart = new Chart(canvas, {
+    var id = new Chart(canvas, {
         type: 'pie',
         data: {
             labels: [

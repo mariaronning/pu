@@ -110,8 +110,8 @@ function createListMyCourses(courseId) {
     const button = document.createElement('button');
 
 
-    span.className = "glyphicon glyphicon-ok";
-    span.style.color="green";
+    span.className = "glyphicon glyphicon-remove";
+    span.style.color="red";
     li.id = courseId;
     a.innerText = " " + courseId;
     a.style.textDecoration = "none";
