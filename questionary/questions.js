@@ -36,7 +36,10 @@ courseHeader.innerText = value;
 
 //Create list of keys, in order to randomize questions
 var list = new Array();
-
+var lvl1 = new Array();
+var lvl2 = new Array();
+var lvl3 = new Array();
+var myLevel = 1;
 //Checks wheter there are registered any questions at all and checks wheter there are any questions on a certain level.
 function fireQuestionary() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
@@ -55,13 +58,27 @@ function fireQuestionary() {
                     }
                 });
             } else {
-                list.push(key);
+                dbRefPoints.child(value + "/questions/" + key).once('value', snap => {
+                    if (snap.hasChild("levelData")) {
+                        if(snap.val().levelData.level == 1) {
+                            lvl1.push(key);
+                        } else if(snap.val().levelData.level == 2) {
+                            lvl2.push(key);
+                        } else if(snap.val().levelData.level == 3) {
+                            lvl3.push(key);
+                        }
+                        list.push(key);
+                    }
+                    else {
+                        lvl1.push(key);
+                    }
+                });
             }
         }
-        if(list.length > 10) {
+        if(list.length > 10 || (lvl1.length + lvl2.length + lvl3.length) > 10) {
             total = 10;
             questions();
-        } else if(list.length == 0) {
+        } else if(list.length == 0 && lvl1.length == 0 && lvl2.length == 0 && lvl3.length == 0) {
             const h2 = document.createElement('h2');
             h2.innerText = "There are no questions on this level yet";
             h2.style.marginLeft = "10%";
@@ -108,27 +125,47 @@ function checkIfThereAreQuestions() {
 function questions() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         clearList();
-        var max = list.length;
-        var random = Math.floor(Math.random()* max);
-        var question = snap.val().questions[list[random]].question;
-        var answers = snap.val().questions[list[random]].answers;
-        correct = snap.val().questions[list[random]].correct;
-        currentKey = list[random];
-        var start ="";
-        if(correct.constructor === Array) {
-             start = "<input type='checkbox' name='checkAnswer' ";
+        if(levelid == 'random') {
+            if(myLevel == 1 && lvl1.length > 0) {
+                createQuestions(lvl1, snap);
+            } else if(myLevel == 2 && lvl2.length > 0) {
+                createQuestions(lvl2, snap);
+            }
+            else if (myLevel == 3 && lvl3.length > 0) {
+                createQuestions(lvl3, snap);
+            } else {
+                createQuestions(list, snap);
+            }
+        } else {
+            createQuestions(list, snap);
         }
-        else {
-            start= "<input type='radio' name='groupAnswer' ";
-        }
-        $('#question').text(question);
-        for (var key in answers) {
-            $('#answerList').append("<li id='" + key + "'>" + start + "value=" + key + "> " +
-                                                answers[key] + "</li>");
-        }
-        $('#info').append('<p> Number of answered questions: ' + answeredQuestions + '/' + total + ' </p>');
+
     });
 }
+
+//Function that creates questions based on which list
+function createQuestions(mylist, snap) {
+    var max = mylist.length;
+    var random = Math.floor(Math.random()* max);
+    var question = snap.val().questions[mylist[random]].question;
+    var answers = snap.val().questions[mylist[random]].answers;
+    correct = snap.val().questions[mylist[random]].correct;
+    currentKey = mylist[random];
+    var start ="";
+    if(correct.constructor === Array) {
+         start = "<input type='checkbox' name='checkAnswer' ";
+    }
+    else {
+        start= "<input type='radio' name='groupAnswer' ";
+    }
+    $('#question').text(question);
+    for (var key in answers) {
+        $('#answerList').append("<li id='" + key + "'>" + start + "value=" + key + "> " +
+                                            answers[key] + "</li>");
+    }
+    $('#info').append('<p> Number of answered questions: ' + answeredQuestions + '/' + total + ' </p>');
+}
+
 //Checks whether a radio button is checked and returns the value;
 function checkAnswerRadio() {
     return $('input[name=groupAnswer]:checked', '#answerList').val();
@@ -363,10 +400,16 @@ $(function(){
             $('#' + answered).css('color', 'green');
             points += 1;
             point = 1;
+            if(myLevel < 3) {
+                myLevel += 1;
+            }
         }
         else {
             $('#' + answered).css('color', 'red');
             $('#' + correct).css('color', 'green');
+            if(myLevel > 1) {
+                myLevel -= 1;
+            }
 
         }
         checkIfPoints(point);
@@ -395,13 +438,20 @@ $(function(){
                     tempPoints -= 0.5;
                 }
             }
-            if (tempPoints >= 0) {
+            if (tempPoints > 0) {
                 points += round(tempPoints/total, 1);
                 //console.log(round(tempPoints/total, 1))
                 checkIfPoints(round(tempPoints/total, 1));
+                if(round(tempPoints/total, 1) == 1 && myLevel < 3) {
+                    myLevel += 1;
+                }
+            } else {
+                if(myLevel > 1) {
+                    myLevel -= 1;
+                }
             }
             $('#buttonAnswer').prop('disabled', true);
-            $('#buttonNext').removeAttr('disabled'); 
+            $('#buttonNext').removeAttr('disabled');
         }
 
     });
