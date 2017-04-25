@@ -30,7 +30,7 @@
     promise.catch(e => document.getElementById("errorLogin").innerHTML = e.message);
 
   });
-
+  //Logs out the user
   btnLogout.addEventListener('click', e => {
     firebase.auth().signOut();
   });
