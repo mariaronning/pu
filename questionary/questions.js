@@ -121,7 +121,7 @@ function checkIfThereAreQuestions() {
 
 }
 
-//Fetches questions, answers and correct values and writes the first two to the DOM.
+//Fetches questions, answers and correct values and writes the first to the DOM.
 function questions() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         clearList();
