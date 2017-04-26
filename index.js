@@ -1,6 +1,6 @@
 (function() {
 
-
+//Assigning variables different elements.
   const txtEmail = document.getElementById("txtEmail");
   const txtPassword = document.getElementById("txtPassword");
   const btnLogin = document.getElementById("btnLogin");
@@ -8,6 +8,8 @@
   const btnLogout = document.getElementById("btnLogout");
   var newUser = false;
   var counter = 1;
+
+  //Changes images of our front page.
   function changeImage() {
     $(document).ready(function() {
         console.log(counter);
@@ -19,7 +21,9 @@
         counter ++;
     }
   }
+  //changeImage() runs every 12000 ms
   setInterval(function() {changeImage()}, 12000);
+
   //Add login event
   btnLogin.addEventListener('click', e => {
     const email = txtEmail.value;
@@ -45,7 +49,8 @@
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.catch(e => document.getElementById("errorLogin").innerHTML = e.message);
   });
-  //Add a realtime listener
+  
+  //Adds a realtime listener and redirects if userid is a professor
   firebase.auth().onAuthStateChanged(firebaseUser => {
     var name
     if(firebaseUser) {

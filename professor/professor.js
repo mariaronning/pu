@@ -1,4 +1,4 @@
-
+//Assigning variables different elements.
 const btnLogout = document.getElementById('btnLogout');
 const searchValue = document.getElementById('sok');
 const preObject = document.getElementById('searchEnigne');
@@ -190,7 +190,6 @@ function getID() {
                 } else {
                     check = false;
                 }
-
             }
             if (check == true) {
             } else {

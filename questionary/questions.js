@@ -1,3 +1,4 @@
+//Assigning variables different elements.
 const dbRefCourses = firebase.database().ref().child('Courses/');
 const dbRefUsers = firebase.database().ref().child('Users/');
 const btnLogout = document.getElementById('btnLogout');
@@ -31,6 +32,7 @@ function getUrlVars() {
 
 
 var value = getUrlVars()['id'];
+//OBS: If the levelid is random, then it is a knowledge based test, wrong naming..
 var levelid = getUrlVars()['level'];
 courseHeader.innerText = value;
 
@@ -42,9 +44,9 @@ var lvl3 = new Array();
 var myLevel = 1;
 //Checks wheter there are registered any questions at all and checks wheter there are any questions on a certain level.
 function fireQuestionary() {
+    //Fills list if user has chosen level 1, level 2 or level 3.
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         for(var key in snap.val().questions){
-
             if(levelid != "random") {
                 dbRefPoints.child(value + "/questions/" + key).once('value', snap => {
                     if (snap.hasChild("levelData")) {
@@ -58,6 +60,7 @@ function fireQuestionary() {
                     }
                 });
             } else {
+                //Own lists if user has chosen the knowledge based test
                 dbRefPoints.child(value + "/questions/" + key).once('value', snap => {
                     if (snap.hasChild("levelData")) {
                         if(snap.val().levelData.level == 1) {
@@ -75,6 +78,7 @@ function fireQuestionary() {
                 });
             }
         }
+        //Checks for various scenarios
         if(list.length > 10 || (lvl1.length + lvl2.length + lvl3.length) > 10) {
             total = 10;
             questions();
@@ -121,7 +125,7 @@ function checkIfThereAreQuestions() {
 
 }
 
-//Fetches questions, answers and correct values and writes the first to the DOM.
+//Fetches questions, answers and correct values and writes them to the DOM, based on which test.
 function questions() {
     dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
         clearList();
@@ -143,7 +147,7 @@ function questions() {
     });
 }
 
-//Function that creates questions based on which list
+//Function that creates questions based on which list from questions().
 function createQuestions(mylist, snap) {
     var max = mylist.length;
     var random = Math.floor(Math.random()* max);
@@ -245,6 +249,7 @@ function returnResults() {
     div.appendChild(pPercentage);
     divDiagram.appendChild(canvas);
 
+    //Creates a chart of the results
     var myChart = new Chart(canvas, {
         type: 'pie',
         data: {
@@ -292,6 +297,7 @@ function writeToDatabase(point, setAmount, lvl) {
 //Updates points, number of times answered and level if already in database, else writes the objects to the database
 function checkIfPoints(setPoint) {
     dbRefPoints.child(value + "/questions/" + currentKey).once('value', snap => {
+        //Checks if question already has registered levelData.
         if (snap.hasChild('levelData')) {
             var totalAmount = snap.val().levelData.amount;
             var pointQuestion = snap.val().levelData.points;
@@ -313,6 +319,7 @@ function checkIfPoints(setPoint) {
             })
 
         } else {
+            //Else it creates to levelData and writes to database.
             var percentage = round((setPoint/1)*100, 0);
             var lvl;
             if (percentage <= 40) {
@@ -336,7 +343,8 @@ function createUserResult() {
 }
 
 
-
+//Writes the results to the user that is logged in. If user has not registered
+//results from before, then it creates and then writes.
 function writeResultsToUser() {
     dbRefUsers.child(user).once('value', snap => {
         if (snap.hasChild('results')) {
@@ -362,9 +370,11 @@ function writeResultsToUser() {
 
 //jQuery code that runs questions() on loading of website and on button click.
 $(function(){
+    //Must first check if there are any questions in the course chosen.
     $( document ).ready(function() {
         checkIfThereAreQuestions();
     });
+    //Clicks on the next button and either gives you next question or the result
     $('#buttonNext').click(function(){
         answeredQuestions ++;
         if(counter < total) {
@@ -379,6 +389,7 @@ $(function(){
 
         $('#buttonNext').prop('disabled', true);
     });
+    //Listens to see if any of the answers has been clicked. Enables answer if it has been selected.
     $('#answerList').change(function () {
         if(correct.constructor === Array) {
             $('#buttonAnswer').prop('disabled', true);
@@ -392,10 +403,11 @@ $(function(){
 
         }
     });
-    //Gives user feedback if wrong/right when radiobutton
+    //Gives user feedback if wrong/right when radiobutton is used
     $('#buttonAnswer').click(function(){
         var answered = checkAnswerRadio();
         point = 0;
+        //answer is correct
         if(correct == answered) {
             $('#' + answered).css('color', 'green');
             points += 1;
@@ -404,6 +416,7 @@ $(function(){
                 myLevel += 1;
             }
         }
+        //answer is wrong
         else {
             $('#' + answered).css('color', 'red');
             $('#' + correct).css('color', 'green');
@@ -417,7 +430,8 @@ $(function(){
         $('#buttonNext').removeAttr('disabled');
     });
 
-    //Gives user feedback to wrong/right answer when checkboxes
+    //Gives user feedback to wrong/right answer when checkboxes is checked
+    //Gives 1 point for each correct answer, else -0.5 if wrong. Cannot go below 0.
     $('#buttonAnswer').click(function() {
         if(correct.constructor === Array) {
             var total = correct.length;
@@ -438,6 +452,8 @@ $(function(){
                     tempPoints -= 0.5;
                 }
             }
+            //If points are above 0, then it needs to be registered.
+            //Also checks level within the if/else if knowledge based test is selected.
             if (tempPoints > 0) {
                 points += round(tempPoints/total, 1);
                 //console.log(round(tempPoints/total, 1))
@@ -463,6 +479,7 @@ function round(value, precision) {
 }
 
 var user;
+//Real time listener that writes out user email.
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
       user = firebaseUser.uid;

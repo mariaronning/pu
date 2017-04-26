@@ -1,3 +1,4 @@
+//Assigning variables different elements.
 const dbRefCourses = firebase.database().ref().child('Courses/');
 const dbRefUsers = firebase.database().ref().child('Users/');
 const btnLogout = document.getElementById('btnLogout');
@@ -22,6 +23,8 @@ dbRefCourses.orderByKey().equalTo(value).on("child_added", snap => {
 	header.innerText = snap.val().name;
 });
 
+//Gets the amount and points from every question in the course. Amount
+//and points from every questions ever answered.
 function getAllResults() {
     var points = 0;
     var amount = 0;
@@ -35,7 +38,7 @@ function getAllResults() {
         createGraphs(courseResults, points, amount - points, 'allResults');
     });
 }
-
+//Gets only the users results from the given course, in order to get an average.
 function getMyResults() {
     dbRefUsers.child(user).once('value', snap => {
         var points = 0;
@@ -50,7 +53,7 @@ function getMyResults() {
         createGraphs(myResults, points, (amount - points), 'results');
     });
 }
-
+//Creates a graph that views the amount of right and wrong answered.
 function createGraphs(div, right, wrong, id) {
     const canvas = document.createElement('canvas');
     canvas.id = id;
@@ -86,6 +89,7 @@ function createGraphs(div, right, wrong, id) {
     });
 }
 
+//Creates href to each of the p elements in div 1, in order to redirect to right place.
 function createLinks() {
 	for(var i = 0; i < testLinks.length; i++) {
         var levelid = $(testLinks[i]).attr('id');
