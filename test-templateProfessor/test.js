@@ -1,3 +1,4 @@
+//Assigning variables different elements.
 const dbRefCourses = firebase.database().ref().child('Courses/');
 const btnLogout = document.getElementById('btnLogout');
 const header = document.getElementById('subject');
@@ -30,7 +31,7 @@ var answersLevel1 = 0;
 var answersLevel2 = 0;
 var answersLevel3 = 0;
 
-
+//Gets the amout and points from each question in the database from each level, for then this send this to createGraphs()
 function getResults() {
     dbRefCourses.child(value + "/questions/").once('value', snap => {
         for(var key in snap.val()) {
@@ -54,6 +55,7 @@ function getResults() {
 }
 getResults();
 
+//Creates a graph with the amount and points from each level
 function createGraphs(div, right, wrong, id) {
     const canvas = document.createElement('canvas');
     canvas.id = id;

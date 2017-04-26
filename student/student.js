@@ -1,4 +1,4 @@
-
+//Assigning variables different elements.
 const btnLogout = document.getElementById('btnLogout');
 const searchValue = document.getElementById('sok');
 const preObject = document.getElementById('searchEnigne');
@@ -83,7 +83,7 @@ function clearList() {
     }
 }
 
-//Creates user in database if user is not already registrered.
+//Creates a user in database if user is not already registrered.
 function createUser(user, emailUser) {
     firebase.database().ref("Users/" + user).set({
             email: emailUser
@@ -91,7 +91,7 @@ function createUser(user, emailUser) {
 }
 
 
-//Checks if user is already registrered in database
+//Checks if user is already registrered in database.
 function checkIfUser(userid, email) {
     dbRefUsers.once('value', snap => {
         if (snap.hasChild(userid)) {
@@ -214,7 +214,7 @@ btnLogout.addEventListener('click', e => {
 
 var user;
 
-//Prints the user email of logged in user. Checks if user is registrered in the database.
+//Realtime listener. Prints the user email of logged in user. Checks if user is registrered in the database.
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
       checkIfUser(firebaseUser.uid, firebaseUser.email);
