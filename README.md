@@ -7,7 +7,7 @@ The results from these, and other available test, will be shown to the professor
 
 **Our test file is located under the folder features and the test file is named test.js.**
 
-To see our website visit: https://feedbot-7494b.firebaseapp.com/
+To see our website visit https://feedbot-7494b.firebaseapp.com/ in a Chrome browser. Some features are not available in other browsers. 
 
 ### For further development:
 It is not possible to run our database as a localhost, due to firebase database restrictions. Still, it is possible to ask us for permission if you want to develop this project further. You need to clone our project, create a firebase user and then send a mail to theprepbot@gmail.com and ask for permission to use our database. You need to install node js and then run these commands in the terminal:
