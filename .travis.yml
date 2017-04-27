@@ -7,4 +7,4 @@ install:
   - npm install chai
 script:
   - echo 'Hello Firebase'
-  - mocha features/travisTest.js
+  - mocha testResearchNotActualTest/travisTest.js
