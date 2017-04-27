@@ -201,7 +201,6 @@ function getID() {
 
 //Logs out the user
 btnLogout.addEventListener('click', e => {
-
   firebase.auth().signOut();
   document.location.href = '../index.html';
 
