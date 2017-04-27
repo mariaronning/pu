@@ -10,7 +10,7 @@ The results from these, and other available test, will be shown to the professor
 To see our website visit https://feedbot-7494b.firebaseapp.com/ in a Chrome browser. Some features are not available in other browsers.
 
 ### For further development:
-In order to further develop our project you need to clone our git repository found at: https://github.com/mariaronning/pu. Then you need to run:
+In order to further develop our project you need to clone our git repository found at: https://github.com/mariaronning/pu and have node js installed on your computer. Then you need to run:
 ```
     $ npm install
     $ npm install -g bower
